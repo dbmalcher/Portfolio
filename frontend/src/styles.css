@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+:root {
+  --win7-blue: #003399;
+  --win7-light-blue: #4a90e2;
+  --win7-dark-blue: #001f5c;
+  --win7-gradient: linear-gradient(to bottom, #003399 0%, #0055aa 6%, #2585d6 26%, #2585d6 52%, #1278c8 73%, #0366c9 86%, #0055aa 100%);
+  --win7-taskbar-gradient: linear-gradient(to bottom, #245edb 0%, #3483eb 5%, #4293eb 14%, #52a2ec 21%, #5caef8 28%, #64b5f6 40%, #5cadf4 55%, #4c9de8 75%, #3885dd 90%, #2b71c9 100%);
+  --win7-aero-gradient: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+  --win7-border: 1px solid rgba(0,0,0,0.4);
+  --win7-text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  --glass-reflection: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.1) 100%);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
