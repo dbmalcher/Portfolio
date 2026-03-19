@@ -1,0 +1,156 @@
+:root {
+  /* Colors - Primary */
+  --color-primary-900: #001f5c;
+  --color-primary-700: #003399;
+  --color-primary-500: #1e4f9e;
+  --color-primary-400: #245edb;
+  --color-primary-300: #2a5fad;
+  --color-primary-200: #3c85cb;
+  --color-primary-100: #4a90e2;
+  --color-primary-50: #2585d6;
+
+  /* Colors - Accent */
+  --color-accent: #4a90e2;
+  --color-accent-light: #64b5f6;
+  
+  /* Colors - Window */
+  --color-window-bg-start: #f0f0f0;
+  --color-window-bg-end: #ffffff;
+  --color-window-border: #1a4674;
+  --color-window-titlebar: #3c85cb;
+  --color-window-titlebar-active: #1e4f9e;
+  --color-window-titlebar-end: #2a5fad;
+  
+  /* Colors - Taskbar */
+  --color-taskbar-start: #245edb;
+  --color-taskbar-end: #2b71c9;
+  --color-taskbar-light: #64b5f6;
+  
+  /* Colors - Start Menu */
+  --color-startmenu-start: #1e4f9e;
+  --color-startmenu-mid: #2a5fad;
+  --color-startmenu-mid2: #3c85cb;
+  --color-startmenu-end: #4599da;
+  
+  /* Colors - Close Button */
+  --color-close-start: #e57a7a;
+  --color-close-mid: #d64d4d;
+  --color-close-end: #c73e3e;
+  --color-close-hover-start: #f08080;
+  --color-close-hover-mid: #e05050;
+  --color-close-hover-end: #d04040;
+  
+  /* Colors - Text */
+  --color-text-white: #ffffff;
+  --color-text-black: #000000;
+  --color-text-dark: #333333;
+  --color-text-gray: #e0e0e0;
+  
+  /* Colors - Backgrounds */
+  --color-bg-dark: #000000;
+  --color-bg-light: #e6e6e6;
+  
+  /* Gradients */
+  --gradient-window-titlebar: linear-gradient(to bottom, var(--color-window-titlebar) 0%, var(--color-window-titlebar-end) 100%);
+  --gradient-window-titlebar-active: linear-gradient(to bottom, var(--color-window-titlebar-active) 0%, var(--color-window-titlebar-end) 100%);
+  --gradient-taskbar: linear-gradient(to bottom, #245edb 0%, #3483eb 5%, #4293eb 14%, #52a2ec 21%, #5caef8 28%, #64b5f6 40%, #5cadf4 55%, #4c9de8 75%, #3885dd 90%, #2b71c9 100%);
+  --gradient-startmenu: linear-gradient(to bottom, var(--color-startmenu-start) 0%, var(--color-startmenu-mid) 8%, #3371bc 14%, var(--color-startmenu-mid2) 21%, var(--color-startmenu-end) 50%, var(--color-startmenu-mid2) 79%, var(--color-startmenu-mid) 100%);
+  --gradient-window: linear-gradient(to bottom, var(--color-window-bg-start) 0%, var(--color-bg-light) 5%, var(--color-window-bg-end) 6%, var(--color-window-bg-end) 100%);
+  --gradient-button: linear-gradient(to bottom, #f5f5f5 0%, #e0e0e0 50%, #d0d0d0 100%);
+  --gradient-button-hover: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+  --gradient-close: linear-gradient(to bottom, var(--color-close-start) 0%, var(--color-close-mid) 50%, var(--color-close-end) 100%);
+  --gradient-close-hover: linear-gradient(to bottom, var(--color-close-hover-start) 0%, var(--color-close-hover-mid) 50%, var(--color-close-hover-end) 100%);
+  
+  /* Typography */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-base: 12px;
+  --font-size-md: 13px;
+  --font-size-lg: 14px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 24px;
+  --font-size-hero: 40px;
+  
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  /* Spacing */
+  --spacing-xs: 2px;
+  --spacing-sm: 3px;
+  --spacing-md: 5px;
+  --spacing-base: 8px;
+  --spacing-lg: 10px;
+  --spacing-xl: 15px;
+  --spacing-2xl: 20px;
+  
+  /* Sizing */
+  --taskbar-height: 40px;
+  --taskbar-height-md: 38px;
+  --taskbar-height-sm: 35px;
+  --titlebar-height: 28px;
+  --icon-size-sm: 14px;
+  --icon-size-base: 16px;
+  --icon-size-lg: 18px;
+  --icon-size-xl: 20px;
+  --icon-size-2xl: 24px;
+  --icon-size-hero: 32px;
+  --icon-size-desktop: 40px;
+  --button-width: 28px;
+  --button-width-sm: 24px;
+  --button-width-xs: 22px;
+  --button-height: 20px;
+  --button-height-sm: 18px;
+  --button-height-xs: 16px;
+  --desktop-icon-width: 75px;
+  --desktop-icon-width-md: 65px;
+  --desktop-icon-width-sm: 60px;
+  --startmenu-width: 400px;
+  --startmenu-width-md: 350px;
+  --window-min-width: 300px;
+  --window-min-width-md: 280px;
+  --window-min-width-sm: 250px;
+  --window-min-height: 200px;
+  --window-min-height-md: 180px;
+  --window-min-height-sm: 150px;
+  
+  /* Border Radius */
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  
+  /* Shadows */
+  --shadow-window: 0 5px 20px rgba(0, 0, 0, 0.4);
+  --shadow-window-dragging: 0 15px 40px rgba(0, 0, 0, 0.5);
+  --shadow-taskbar: 0 -2px 5px rgba(0, 0, 0, 0.3);
+  --shadow-startmenu: 0 0 10px rgba(0, 0, 0, 0.5);
+  --shadow-icon: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-text-light: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  --shadow-text-strong: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  
+  /* Borders */
+  --border-window: 1px solid var(--color-window-border);
+  --border-transparent: 1px solid transparent;
+  --border-light: 1px solid rgba(0, 0, 0, 0.3);
+  --border-light-hover: 1px solid rgba(255, 255, 255, 0.3);
+  --border-startmenu: 1px solid rgba(0, 0, 0, 0.5);
+  
+  /* Transitions */
+  --transition-fast: 0.1s ease;
+  --transition-normal: 0.15s ease-out;
+  
+  /* Z-index */
+  --z-taskbar: 1000;
+  --z-startmenu: 1001;
+  --z-window-active: 100;
+  --z-window-inactive: 50;
+  
+  /* Opacity */
+  --opacity-window-inactive: 0.95;
+  --opacity-minimized: 0.6;
+  --opacity-tray: 0.2;
+}

@@ -1,0 +1,58 @@
+@import '../atoms/tokens.css';
+
+.window-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--gradient-window-titlebar);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.window.active .window-titlebar {
+  background: var(--gradient-window-titlebar-active);
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text-white);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  text-shadow: var(--shadow-text-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-icon {
+  font-size: var(--icon-size-base);
+  flex-shrink: 0;
+}
+
+.window-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-controls {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .window-title {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 768px) {
+  .window-title {
+    font-size: var(--font-size-sm);
+  }
+}

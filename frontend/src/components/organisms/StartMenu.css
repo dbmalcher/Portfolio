@@ -1,0 +1,115 @@
+@import '../atoms/tokens.css';
+
+.start-menu {
+  position: fixed;
+  bottom: var(--taskbar-height);
+  left: 0;
+  width: var(--startmenu-width);
+  max-width: calc(100vw - 20px);
+  display: flex;
+  background: var(--gradient-startmenu);
+  border: var(--border-startmenu);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: var(--shadow-startmenu), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  z-index: var(--z-startmenu);
+  animation: slideUp var(--transition-normal);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.start-menu-left {
+  flex: 1;
+  padding: var(--spacing-base);
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  min-width: 0;
+}
+
+.start-menu-right {
+  width: 150px;
+  min-width: 100px;
+  padding: var(--spacing-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--spacing-xs);
+}
+
+.user-panel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.user-avatar {
+  font-size: var(--icon-size-hero);
+}
+
+.user-name {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-white);
+  font-weight: var(--font-weight-bold);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+@media (max-width: 1024px) {
+  .start-menu {
+    width: var(--startmenu-width-md);
+  }
+  
+  .user-avatar {
+    font-size: var(--icon-size-2xl);
+  }
+  
+  .user-name {
+    font-size: var(--font-size-lg);
+  }
+  
+  .start-menu-right {
+    width: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .start-menu {
+    bottom: var(--taskbar-height-sm);
+    width: calc(100vw - 10px);
+    left: var(--spacing-xs);
+  }
+  
+  .user-avatar {
+    font-size: var(--icon-size-xl);
+  }
+  
+  .user-name {
+    font-size: var(--font-size-base);
+  }
+  
+  .start-menu-right {
+    display: none;
+  }
+  
+  .start-menu-left {
+    border-right: none;
+  }
+}

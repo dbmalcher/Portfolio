@@ -1,0 +1,69 @@
+@import '../atoms/tokens.css';
+
+.taskbar-window {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-lg);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.1) 100%);
+  border: var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-white);
+  cursor: pointer;
+  min-width: 120px;
+  max-width: 180px;
+  text-shadow: var(--shadow-text-light);
+}
+
+.taskbar-window:hover {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(0,0,0,0.1) 100%);
+}
+
+.taskbar-window.active {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 50%, rgba(0,0,0,0.15) 100%);
+  border: var(--border-light-hover);
+}
+
+.taskbar-window.minimized {
+  opacity: var(--opacity-minimized);
+}
+
+.taskbar-window .window-icon {
+  font-size: var(--icon-size-base);
+  flex-shrink: 0;
+}
+
+.taskbar-window .window-title {
+  font-size: var(--font-size-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1024px) {
+  .taskbar-window {
+    min-width: 100px;
+    max-width: 150px;
+  }
+  
+  .taskbar-window .window-title {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 768px) {
+  .taskbar-window {
+    min-width: 80px;
+    max-width: 120px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    gap: var(--spacing-xs);
+  }
+  
+  .taskbar-window .window-icon {
+    font-size: var(--icon-size-sm);
+  }
+  
+  .taskbar-window .window-title {
+    font-size: var(--font-size-xs);
+  }
+}

@@ -1,0 +1,24 @@
+@import '../atoms/tokens.css';
+
+.tray-lang {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  text-shadow: var(--shadow-text-light);
+}
+
+.tray-lang:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .tray-lang {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-xs);
+  }
+}

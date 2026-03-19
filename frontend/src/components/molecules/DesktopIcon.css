@@ -1,0 +1,71 @@
+@import '../atoms/tokens.css';
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--desktop-icon-width);
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  border: var(--border-transparent);
+}
+
+.desktop-icon:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border: var(--border-light-hover);
+}
+
+.desktop-icon-image {
+  font-size: var(--icon-size-desktop);
+  margin-bottom: var(--spacing-sm);
+  text-shadow: var(--shadow-icon);
+}
+
+.desktop-icon-label {
+  color: var(--color-text-white);
+  font-size: var(--font-size-base);
+  text-align: center;
+  text-shadow: var(--shadow-text-strong), -1px -1px 1px rgba(0, 0, 0, 0.4);
+  word-wrap: break-word;
+  max-width: 70px;
+}
+
+.desktop-icon:active .desktop-icon-label {
+  background: rgba(0, 0, 255, 0.3);
+}
+
+.desktop-icon.active .desktop-icon-label {
+  background: rgba(0, 0, 128, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .desktop-icon {
+    width: var(--desktop-icon-width-md);
+  }
+  
+  .desktop-icon-image {
+    font-size: var(--icon-size-2xl);
+  }
+  
+  .desktop-icon-label {
+    font-size: var(--font-size-sm);
+    max-width: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-icon {
+    width: var(--desktop-icon-width-sm);
+    padding: var(--spacing-xs);
+  }
+  
+  .desktop-icon-image {
+    font-size: var(--icon-size-xl);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .desktop-icon-label {
+    font-size: var(--font-size-xs);
+    max-width: 55px;
+  }
+}

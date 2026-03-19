@@ -1,14 +1,104 @@
 import { useState } from 'react';
-import Desktop from './components/Desktop';
-import Taskbar from './components/Taskbar';
-import Window from './components/Window';
+import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
+import { Desktop, Taskbar, Window } from './components/organisms';
 import './styles.css';
 
-function App() {
+function WindowContent({ content }) {
+  const { t } = useLanguage();
+  
+  const skills = [
+    { name: 'React / React Native', level: 90 },
+    { name: 'Node.js', level: 85 },
+    { name: 'TypeScript', level: 80 },
+    { name: 'Python', level: 75 },
+    { name: 'PostgreSQL', level: 70 },
+    { name: 'CSS / SCSS', level: 85 },
+  ];
+
+  switch(content) {
+    case 'about':
+      return (
+        <div style={{ padding: '20px', color: '#000' }}>
+          <h2 style={{ marginBottom: '15px', fontSize: '24px' }}>Daniel Developer</h2>
+          <p style={{ marginBottom: '10px' }}>{t('fullStackDeveloper')}</p>
+          <p style={{ marginBottom: '10px' }}>{t('specialties')}</p>
+          <ul style={{ marginLeft: '20px' }}>
+            <li>React / React Native</li>
+            <li>Node.js</li>
+            <li>TypeScript</li>
+            <li>Python</li>
+          </ul>
+        </div>
+      );
+    case 'projects':
+      return (
+        <div style={{ padding: '20px', color: '#000' }}>
+          <h2 style={{ marginBottom: '15px', fontSize: '24px' }}>{t('projects')}</h2>
+          <p>{t('comingSoon')}</p>
+        </div>
+      );
+    case 'contact':
+      return (
+        <div style={{ padding: '20px', color: '#000' }}>
+          <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>{t('contact')}</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '20px' }}>📧</span>
+              <span>{t('email')}: daniel@email.com</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '20px' }}>🐙</span>
+              <span>{t('github')}: github.com/daniel</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '20px' }}>💼</span>
+              <span>{t('linkedin')}: linkedin.com/in/daniel</span>
+            </div>
+          </div>
+        </div>
+      );
+    case 'skills':
+      return (
+        <div style={{ padding: '20px', color: '#000' }}>
+          <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>{t('abilities')}</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            {skills.map((skill) => (
+              <div key={skill.name}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                  <span>{skill.name}</span>
+                  <span>{skill.level}%</span>
+                </div>
+                <div style={{ 
+                  width: '100%', 
+                  height: '10px', 
+                  background: '#e0e0e0', 
+                  borderRadius: '5px',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{ 
+                    width: `${skill.level}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(to right, #1e4f9e, #3c85cb)',
+                    borderRadius: '5px'
+                  }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    default:
+      return <div style={{ padding: '20px', color: '#000' }}>Content</div>;
+  }
+}
+
+function AppContent() {
   const [windows, setWindows] = useState([
-    { id: 1, title: 'Sobre Mim', content: 'about', isOpen: true, isMinimized: false, position: { x: 100, y: 50 } },
+    { id: 1, content: 'about', isOpen: true, isMinimized: false, position: { x: 900, y: 20 } },
+    { id: 2, content: 'contact', isOpen: true, isMinimized: false, position: { x: 1400, y: 180 } },
+    { id: 3, content: 'skills', isOpen: true, isMinimized: false, position: { x: 1000, y: 500 } },
   ]);
-  const [activeWindow, setActiveWindow] = useState(1);
+  const [activeWindow, setActiveWindow] = useState(3);
   const [showStartMenu, setShowStartMenu] = useState(false);
 
   const openWindow = (contentId, title, content) => {
@@ -73,92 +163,6 @@ function App() {
     setShowStartMenu(!showStartMenu);
   };
 
-  const getWindowContent = (content) => {
-    switch(content) {
-      case 'about':
-        return (
-          <div style={{ padding: '20px', color: '#000' }}>
-            <h2 style={{ marginBottom: '15px', fontSize: '24px' }}>Daniel Developer</h2>
-            <p style={{ marginBottom: '10px' }}>Desenvolvedor Full Stack com paixão por criar soluções inovadoras.</p>
-            <p style={{ marginBottom: '10px' }}>Especialidades:</p>
-            <ul style={{ marginLeft: '20px' }}>
-              <li>React / React Native</li>
-              <li>Node.js</li>
-              <li>TypeScript</li>
-              <li>Python</li>
-            </ul>
-          </div>
-        );
-      case 'projects':
-        return (
-          <div style={{ padding: '20px', color: '#000' }}>
-            <h2 style={{ marginBottom: '15px', fontSize: '24px' }}>Meus Projetos</h2>
-            <p>Aqui estarão seus projetos...</p>
-          </div>
-        );
-      case 'contact':
-        return (
-          <div style={{ padding: '20px', color: '#000' }}>
-            <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>Contato</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '20px' }}>📧</span>
-                <span>daniel@email.com</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '20px' }}>🐙</span>
-                <span>github.com/daniel</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '20px' }}>💼</span>
-                <span>linkedin.com/in/daniel</span>
-              </div>
-            </div>
-          </div>
-        );
-      case 'skills':
-        const skills = [
-          { name: 'React / React Native', level: 90 },
-          { name: 'Node.js', level: 85 },
-          { name: 'TypeScript', level: 80 },
-          { name: 'Python', level: 75 },
-          { name: 'PostgreSQL', level: 70 },
-          { name: 'CSS / SCSS', level: 85 },
-        ];
-        return (
-          <div style={{ padding: '20px', color: '#000' }}>
-            <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>Habilidades</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              {skills.map((skill) => (
-                <div key={skill.name}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                    <span>{skill.name}</span>
-                    <span>{skill.level}%</span>
-                  </div>
-                  <div style={{ 
-                    width: '100%', 
-                    height: '10px', 
-                    background: '#e0e0e0', 
-                    borderRadius: '5px',
-                    overflow: 'hidden'
-                  }}>
-                    <div style={{ 
-                      width: `${skill.level}%`, 
-                      height: '100%', 
-                      background: 'linear-gradient(to right, #1e4f9e, #3c85cb)',
-                      borderRadius: '5px'
-                    }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      default:
-        return <div style={{ padding: '20px', color: '#000' }}>Conteúdo</div>;
-    }
-  };
-
   return (
     <div className="desktop">
       <Desktop 
@@ -172,7 +176,7 @@ function App() {
         <Window
           key={win.id}
           id={win.id}
-          title={win.title}
+          titleContent={win.content}
           isActive={activeWindow === win.id}
           isMinimized={win.isMinimized}
           position={win.position}
@@ -181,7 +185,7 @@ function App() {
           onFocus={() => setActiveWindow(win.id)}
           onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
         >
-          {getWindowContent(win.content)}
+          <WindowContent content={win.content} />
         </Window>
       ))}
       
@@ -203,6 +207,14 @@ function App() {
         onOpenWindow={openWindow}
       />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 

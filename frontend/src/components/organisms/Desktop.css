@@ -1,0 +1,30 @@
+@import '../atoms/tokens.css';
+
+.desktop-background {
+  width: 100vw;
+  height: calc(100vh - var(--taskbar-height));
+  background: var(--gradient-taskbar);
+  position: relative;
+  overflow: hidden;
+}
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+  height: 100%;
+  align-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .desktop-background {
+    height: calc(100vh - var(--taskbar-height-sm));
+  }
+  
+  .desktop-icons {
+    padding: var(--spacing-base);
+    gap: var(--spacing-base);
+  }
+}

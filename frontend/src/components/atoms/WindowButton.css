@@ -1,0 +1,42 @@
+@import '../atoms/tokens.css';
+
+.window-btn {
+  width: var(--button-width);
+  height: var(--button-height);
+  border: var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--gradient-button);
+  color: var(--color-text-dark);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-inset);
+}
+
+.window-btn:hover {
+  background: var(--gradient-button-hover);
+}
+
+.window-btn.minimize,
+.window-btn.maximize {
+  /* inherits default styles */
+}
+
+.window-btn.close {
+  background: var(--gradient-close);
+  color: var(--color-text-white);
+}
+
+.window-btn.close:hover {
+  background: var(--gradient-close-hover);
+}
+
+@media (max-width: 768px) {
+  .window-btn {
+    width: var(--button-width-xs);
+    height: var(--button-height-xs);
+    font-size: var(--font-size-xs);
+  }
+}

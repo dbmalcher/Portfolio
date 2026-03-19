@@ -1,0 +1,66 @@
+@import '../atoms/tokens.css';
+
+.window {
+  position: absolute;
+  min-width: var(--window-min-width);
+  min-height: var(--window-min-height);
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 80px);
+  background: var(--gradient-window);
+  border: var(--border-window);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: var(--shadow-window), var(--shadow-inset);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.window.active {
+  z-index: var(--z-window-active);
+}
+
+.window.inactive {
+  z-index: var(--z-window-inactive);
+  opacity: var(--opacity-window-inactive);
+}
+
+.window.dragging {
+  opacity: 0.9;
+  box-shadow: var(--shadow-window-dragging), var(--shadow-inset);
+}
+
+.window.dragging .window-titlebar {
+  cursor: grabbing;
+}
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+@media (max-width: 1024px) {
+  .window {
+    min-width: var(--window-min-width-md);
+    min-height: var(--window-min-height-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .window {
+    min-width: var(--window-min-width-sm);
+    min-height: var(--window-min-height-sm);
+    width: calc(100vw - 60px) !important;
+    height: calc(100vh - 100px) !important;
+    left: 30px !important;
+    top: 30px !important;
+  }
+  
+  .window-content {
+    padding: var(--spacing-lg) !important;
+  }
+  
+  .window-content > div {
+    font-size: var(--font-size-lg);
+  }
+}
