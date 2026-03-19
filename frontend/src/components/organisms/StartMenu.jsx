@@ -1,6 +1,6 @@
 import { useLanguage } from '../../i18n/LanguageContext';
-import { Icon } from '../atoms';
-import { MenuItem } from '../molecules';
+import Icon from '../atoms/Icon';
+import MenuItem from '../molecules/MenuItem';
 import './StartMenu.css';
 
 const menuItems = [

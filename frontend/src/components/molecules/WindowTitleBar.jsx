@@ -1,4 +1,5 @@
-import { Icon, WindowButton } from '../atoms';
+import Icon from '../atoms/Icon';
+import WindowButton from '../atoms/WindowButton';
 import './WindowTitleBar.css';
 
 function WindowTitleBar({ title, isActive, onClose, onMinimize, onFocus, onMouseDown }) {

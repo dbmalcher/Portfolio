@@ -1,4 +1,4 @@
-import { Icon } from '../atoms';
+import Icon from '../atoms/Icon';
 import './MenuItem.css';
 
 function MenuItem({ icon, label, onClick }) {

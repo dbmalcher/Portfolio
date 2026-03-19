@@ -1,5 +1,5 @@
 import { useLanguage } from '../../i18n/LanguageContext';
-import { DesktopIcon } from '../molecules';
+import DesktopIcon from '../molecules/DesktopIcon';
 import './Desktop.css';
 
 const desktopIcons = [

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { WindowTitleBar } from '../molecules';
+import WindowTitleBar from '../molecules/WindowTitleBar';
 import './Window.css';
 
 function Window({ id, titleContent, isActive, isMinimized, position, onClose, onMinimize, onFocus, onPositionChange, children }) {

@@ -1,4 +1,4 @@
-import { Icon } from '../atoms';
+import Icon from '../atoms/Icon';
 import './DesktopIcon.css';
 
 function DesktopIcon({ icon, label, isActive, onClick }) {

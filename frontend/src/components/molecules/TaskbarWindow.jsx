@@ -1,4 +1,4 @@
-import { Icon } from '../atoms';
+import Icon from '../atoms/Icon';
 import './TaskbarWindow.css';
 
 function TaskbarWindow({ title, isActive, isMinimized, onClick }) {

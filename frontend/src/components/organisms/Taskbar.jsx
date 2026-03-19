@@ -1,7 +1,9 @@
 import { useLanguage } from '../../i18n/LanguageContext';
-import { Icon, Clock, LanguageToggle } from '../atoms';
-import { TaskbarWindow } from '../molecules';
-import { StartMenu } from './StartMenu';
+import Icon from '../atoms/Icon';
+import Clock from '../atoms/Clock';
+import LanguageToggle from '../atoms/LanguageToggle';
+import TaskbarWindow from '../molecules/TaskbarWindow';
+import StartMenu from './StartMenu';
 import './Taskbar.css';
 
 function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStartMenu, onOpenWindow }) {
