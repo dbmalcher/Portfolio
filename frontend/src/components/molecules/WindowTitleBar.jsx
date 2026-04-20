@@ -2,14 +2,23 @@ import Icon from '../atoms/Icon';
 import WindowButton from '../atoms/WindowButton';
 import './WindowTitleBar.css';
 
-function WindowTitleBar({ title, isActive, onClose, onMinimize, onFocus, onMouseDown }) {
+const iconMap = {
+  about: 'user-circle',
+  contact: 'mailbox',
+  projects: 'folder',
+  skills: 'paintbrush',
+};
+
+function WindowTitleBar({ title, isActive, onClose, onMinimize, onFocus, onMouseDown, content }) {
+  const iconName = iconMap[content] || 'folder';
+  
   return (
     <div 
       className="window-titlebar"
       onMouseDown={onMouseDown}
     >
       <div className="window-title">
-        <Icon emoji="📄" className="window-icon" />
+        <Icon name={iconName} size={18} className="window-icon" />
         <span className="window-title-text">{title}</span>
       </div>
       <div className="window-controls">

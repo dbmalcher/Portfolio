@@ -3,6 +3,9 @@ import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 import Desktop from './components/organisms/Desktop';
 import Taskbar from './components/organisms/Taskbar';
 import Window from './components/organisms/Window';
+import AboutMe from './components/organisms/AboutMe';
+import ContactMe from './components/organisms/ContactMe';
+import { sounds, initAudio, setVolume as setSoundVolume, updateFanVolume } from './utils/sounds';
 import './styles.css';
 
 const WINDOW_WIDTH = 400;
@@ -141,31 +144,10 @@ function calculateInitialPositions() {
 
 function WindowContent({ content }) {
   const { t } = useLanguage();
-  
-  const skills = [
-    { name: 'React / React Native', level: 90 },
-    { name: 'Node.js', level: 85 },
-    { name: 'TypeScript', level: 80 },
-    { name: 'Python', level: 75 },
-    { name: 'PostgreSQL', level: 70 },
-    { name: 'CSS / SCSS', level: 85 },
-  ];
 
   switch(content) {
     case 'about':
-      return (
-        <div style={{ padding: '20px', color: '#000' }}>
-          <h2 style={{ marginBottom: '15px', fontSize: '24px' }}>Daniel Developer</h2>
-          <p style={{ marginBottom: '10px' }}>{t('fullStackDeveloper')}</p>
-          <p style={{ marginBottom: '10px' }}>{t('specialties')}</p>
-          <ul style={{ marginLeft: '20px' }}>
-            <li>React / React Native</li>
-            <li>Node.js</li>
-            <li>TypeScript</li>
-            <li>Python</li>
-          </ul>
-        </div>
-      );
+      return <AboutMe />;
     case 'projects':
       return (
         <div style={{ padding: '20px', color: '#000' }}>
@@ -174,55 +156,7 @@ function WindowContent({ content }) {
         </div>
       );
     case 'contact':
-      return (
-        <div style={{ padding: '20px', color: '#000' }}>
-          <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>{t('contact')}</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '20px' }}>📧</span>
-              <span>{t('email')}: daniel@email.com</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '20px' }}>🐙</span>
-              <span>{t('github')}: github.com/daniel</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '20px' }}>💼</span>
-              <span>{t('linkedin')}: linkedin.com/in/daniel</span>
-            </div>
-          </div>
-        </div>
-      );
-    case 'skills':
-      return (
-        <div style={{ padding: '20px', color: '#000' }}>
-          <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>{t('abilities')}</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            {skills.map((skill) => (
-              <div key={skill.name}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                  <span>{skill.name}</span>
-                  <span>{skill.level}%</span>
-                </div>
-                <div style={{ 
-                  width: '100%', 
-                  height: '10px', 
-                  background: '#e0e0e0', 
-                  borderRadius: '5px',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{ 
-                    width: `${skill.level}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(to right, #1e4f9e, #3c85cb)',
-                    borderRadius: '5px'
-                  }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
+      return <ContactMe />;
     default:
       return <div style={{ padding: '20px', color: '#000' }}>Content</div>;
   }
@@ -230,17 +164,21 @@ function WindowContent({ content }) {
 
 function AppContent() {
   const [windows, setWindows] = useState(() => {
-    const positions = calculateInitialPositions();
     return [
-      { id: 1, content: 'about', isOpen: true, isMinimized: false, position: positions[0] },
-      { id: 2, content: 'contact', isOpen: true, isMinimized: false, position: positions[1] },
-      { id: 3, content: 'skills', isOpen: true, isMinimized: false, position: { x: positions[2].x - 30, y: positions[2].y } },
+      { id: 1, content: 'about', isOpen: true, isMinimized: false, position: { x: 500, y: 30 } },
+      { id: 2, content: 'contact', isOpen: true, isMinimized: false, position: { x: 1000, y: 80 } },
     ];
   });
   const [activeWindow, setActiveWindow] = useState(1);
   const [showStartMenu, setShowStartMenu] = useState(false);
 
   useEffect(() => {
+    initAudio();
+    
+    setTimeout(() => {
+      sounds.startFan();
+    }, 2000);
+    
     const handleResize = () => {
       setWindows(prevWindows => {
         const viewportWidth = window.innerWidth;
@@ -268,7 +206,10 @@ function AppContent() {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      sounds.stopFan();
+    };
   }, []);
 
   const openWindow = (contentId, title, content) => {
@@ -306,6 +247,7 @@ function AppContent() {
   };
 
   const closeWindow = (id) => {
+    sounds.close();
     setWindows(windows.filter(w => w.id !== id));
     if (activeWindow === id) {
       setActiveWindow(null);
@@ -313,6 +255,7 @@ function AppContent() {
   };
 
   const minimizeWindow = (id) => {
+    sounds.minimize();
     setWindows(windows.map(w => w.id === id ? { ...w, isMinimized: true } : w));
     if (activeWindow === id) {
       const visible = windows.filter(w => w.id !== id && !w.isMinimized);
@@ -321,6 +264,7 @@ function AppContent() {
   };
 
   const restoreWindow = (id) => {
+    sounds.open();
     setWindows(windows.map(w => w.id === id ? { ...w, isMinimized: false } : w));
     setActiveWindow(id);
   };
@@ -330,6 +274,7 @@ function AppContent() {
   };
 
   const toggleStartMenu = () => {
+    sounds.start();
     setShowStartMenu(!showStartMenu);
   };
 
@@ -342,22 +287,29 @@ function AppContent() {
         activeWindow={activeWindow}
       />
       
-      {windows.map(win => (
-        <Window
-          key={win.id}
-          id={win.id}
-          titleContent={win.content}
-          isActive={activeWindow === win.id}
-          isMinimized={win.isMinimized}
-          position={win.position}
-          onClose={() => closeWindow(win.id)}
-          onMinimize={() => minimizeWindow(win.id)}
-          onFocus={() => setActiveWindow(win.id)}
-          onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
-        >
-          <WindowContent content={win.content} />
-        </Window>
-      ))}
+      {windows.map(win => {
+        const isAbout = win.content === 'about';
+        const isContact = win.content === 'contact';
+        return (
+          <Window
+            key={win.id}
+            id={win.id}
+            titleContent={win.content}
+            isActive={activeWindow === win.id}
+            isMinimized={win.isMinimized}
+            position={win.position}
+            onClose={() => closeWindow(win.id)}
+            onMinimize={() => minimizeWindow(win.id)}
+            onFocus={() => setActiveWindow(win.id)}
+            onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
+            width={isAbout ? 600 : isContact ? 350 : undefined}
+            height={isAbout ? 500 : isContact ? 340 : undefined}
+            noWhiteBg={isAbout}
+          >
+            <WindowContent content={win.content} />
+          </Window>
+        );
+      })}
       
       <Taskbar 
         windows={windows} 

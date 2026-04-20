@@ -1,36 +1,41 @@
 @import '../atoms/tokens.css';
 
 .window-btn {
-  width: var(--button-width);
-  height: var(--button-height);
-  border: var(--border-light);
-  border-radius: var(--radius-sm);
-  background: var(--gradient-button);
-  color: var(--color-text-dark);
-  font-size: var(--font-size-base);
+  width: 21px;
+  height: 20px;
+  border: 1px solid rgba(106, 91, 243, 0.4);
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-family: 'Syne', sans-serif;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-inset);
+  transition: all 0.15s;
 }
 
 .window-btn:hover {
-  background: var(--gradient-button-hover);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 100%);
+  border-color: rgba(106, 91, 243, 0.6);
 }
 
 .window-btn.minimize,
 .window-btn.maximize {
-  /* inherits default styles */
+  
 }
 
 .window-btn.close {
-  background: var(--gradient-close);
-  color: var(--color-text-white);
+  background: linear-gradient(135deg, rgba(134, 31, 36, 0.7) 0%, rgba(134, 31, 36, 0.5) 100%);
+  border-color: rgba(134, 31, 36, 0.5);
 }
 
 .window-btn.close:hover {
-  background: var(--gradient-close-hover);
+  background: linear-gradient(135deg, rgba(134, 31, 36, 0.9) 0%, rgba(134, 31, 36, 0.7) 100%);
+  border-color: rgba(134, 31, 36, 0.8);
 }
 
 @media (max-width: 768px) {

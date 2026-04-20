@@ -3,41 +3,59 @@
 .taskbar-window {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-xs) var(--spacing-lg);
-  background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.1) 100%);
-  border: var(--border-light);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-white);
+  gap: 6px;
+  padding: 10px 12px;
+  background: rgba(177, 195, 233, 0.4);
+  border-radius: 8px;
+  color: #555555;
   cursor: pointer;
   min-width: 120px;
   max-width: 180px;
-  text-shadow: var(--shadow-text-light);
+  transition: all 0.15s;
+  border: none;
+  outline: none;
+}
+
+.taskbar-window:focus {
+  outline: none;
+  border: none;
 }
 
 .taskbar-window:hover {
-  background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(0,0,0,0.1) 100%);
+  background: rgba(177, 195, 233, 0.75);
 }
 
 .taskbar-window.active {
-  background: linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 50%, rgba(0,0,0,0.15) 100%);
-  border: var(--border-light-hover);
+  background: rgba(122, 119, 237, 0.8);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .taskbar-window.minimized {
-  opacity: var(--opacity-minimized);
+  opacity: 0.7;
 }
 
 .taskbar-window .window-icon {
-  font-size: var(--icon-size-base);
   flex-shrink: 0;
+  color: #555555;
+}
+
+.taskbar-window.active .window-icon {
+  color: #ffffff;
 }
 
 .taskbar-window .window-title {
-  font-size: var(--font-size-base);
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #555555;
+}
+
+.taskbar-window.active .window-title {
+  color: #ffffff;
 }
 
 @media (max-width: 1024px) {

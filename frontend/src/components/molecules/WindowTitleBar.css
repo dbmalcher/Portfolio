@@ -2,35 +2,38 @@
 
 .window-titlebar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: var(--gradient-window-titlebar);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  gap: 10px;
   cursor: default;
   flex-shrink: 0;
-}
-
-.window.active .window-titlebar {
-  background: var(--gradient-window-titlebar-active);
+  width: 100%;
 }
 
 .window-title {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  color: var(--color-text-white);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  text-shadow: var(--shadow-text-light);
+  gap: 8px;
+  color: #FFFFFF;
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex: 1;
+}
+
+.window.inactive .window-title {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .window-icon {
-  font-size: var(--icon-size-base);
   flex-shrink: 0;
+  color: #FFFFFF;
+}
+
+.window.inactive .window-icon {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .window-title-text {
@@ -41,8 +44,11 @@
 
 .window-controls {
   display: flex;
-  gap: var(--spacing-xs);
+  gap: 8px;
   flex-shrink: 0;
+  flex: 1;
+  justify-content: flex-end;
+  height: 20px;
 }
 
 @media (max-width: 1024px) {

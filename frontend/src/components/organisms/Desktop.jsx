@@ -1,12 +1,12 @@
 import { useLanguage } from '../../i18n/LanguageContext';
 import DesktopIcon from '../molecules/DesktopIcon';
+import { sounds } from '../../utils/sounds';
 import './Desktop.css';
 
 const desktopIcons = [
-  { id: 'about', icon: '👤' },
-  { id: 'projects', icon: '📁' },
-  { id: 'contact', icon: '✉️' },
-  { id: 'skills', icon: '⚡' },
+  { id: 'about', icon: 'user' },
+  { id: 'contact', icon: 'mailbox' },
+  { id: 'projects', icon: 'folder' },
 ];
 
 function Desktop({ onOpenWindow, onFocusWindow, windows, activeWindow }) {
@@ -23,8 +23,13 @@ function Desktop({ onOpenWindow, onFocusWindow, windows, activeWindow }) {
         onFocusWindow(iconId);
       }
     } else {
+      sounds.open();
       onOpenWindow(iconId, label, iconId);
     }
+  };
+
+  const handleHover = () => {
+    sounds.hover();
   };
 
   return (
@@ -41,6 +46,7 @@ function Desktop({ onOpenWindow, onFocusWindow, windows, activeWindow }) {
               label={t(icon.id)}
               isActive={isActive}
               onClick={() => handleClick(icon.id)}
+              onMouseEnter={handleHover}
             />
           );
         })}

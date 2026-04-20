@@ -9,6 +9,12 @@
   --color-primary-100: #4a90e2;
   --color-primary-50: #2585d6;
 
+  /* Colors - Success (from Figma) */
+  --color-success-100: #B4CCB4;
+  --color-success-75: #80AE80;
+  --color-success-50: #4B914B;
+  --color-success-25: #167316;
+
   /* Colors - Accent */
   --color-accent: #4a90e2;
   --color-accent-light: #64b5f6;
@@ -61,8 +67,25 @@
   --gradient-close: linear-gradient(to bottom, var(--color-close-start) 0%, var(--color-close-mid) 50%, var(--color-close-end) 100%);
   --gradient-close-hover: linear-gradient(to bottom, var(--color-close-hover-start) 0%, var(--color-close-hover-mid) 50%, var(--color-close-hover-end) 100%);
   
+  /* Shadows */
+  --shadow-window: 0 5px 20px rgba(0, 0, 0, 0.4);
+  --shadow-window-dragging: 0 15px 40px rgba(0, 0, 0, 0.5);
+  --shadow-taskbar: 0 -2px 5px rgba(0, 0, 0, 0.3);
+  --shadow-startmenu: 0 0 10px rgba(0, 0, 0, 0.5);
+  --shadow-icon: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-text-light: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  --shadow-text-strong: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  
+  /* Borders */
+  --border-window: 1px solid var(--color-window-border);
+  --border-transparent: 1px solid transparent;
+  --border-light: 1px solid rgba(0, 0, 0, 0.3);
+  --border-light-hover: 1px solid rgba(255, 255, 255, 0.3);
+  --border-startmenu: 1px solid rgba(0, 0, 0, 0.5);
+  
   /* Typography */
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family: 'Syne', sans-serif;
   --font-size-xs: 10px;
   --font-size-sm: 11px;
   --font-size-base: 12px;
@@ -75,6 +98,7 @@
   /* Font weights */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
+  --font-weight-semibold: 600;
   --font-weight-bold: 700;
   
   /* Spacing */
@@ -128,16 +152,16 @@
   --shadow-taskbar: 0 -2px 5px rgba(0, 0, 0, 0.3);
   --shadow-startmenu: 0 0 10px rgba(0, 0, 0, 0.5);
   --shadow-icon: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  --shadow-text-light: 1px 1px 0 rgba(0, 0, 0, 0.3);
-  --shadow-text-strong: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-text-light: 1px 1px 0 var(--color-neutral-75);
+  --shadow-text-strong: 1px 1px 2px var(--color-neutral-100);
+  --shadow-inset: inset 0 1px 0 var(--color-neutral-0);
   
   /* Borders */
   --border-window: 1px solid var(--color-window-border);
   --border-transparent: 1px solid transparent;
-  --border-light: 1px solid rgba(0, 0, 0, 0.3);
-  --border-light-hover: 1px solid rgba(255, 255, 255, 0.3);
-  --border-startmenu: 1px solid rgba(0, 0, 0, 0.5);
+  --border-light: 1px solid var(--color-gray-50);
+  --border-light-hover: 1px solid var(--color-gray-70);
+  --border-startmenu: 1px solid var(--color-neutral-25);
   
   /* Transitions */
   --transition-fast: 0.1s ease;
@@ -150,7 +174,7 @@
   --z-window-inactive: 50;
   
   /* Opacity */
-  --opacity-window-inactive: 0.95;
+  --opacity-window-inactive: 0.7;
   --opacity-minimized: 0.6;
   --opacity-tray: 0.2;
 }

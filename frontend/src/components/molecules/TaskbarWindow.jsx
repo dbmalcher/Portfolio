@@ -1,13 +1,22 @@
 import Icon from '../atoms/Icon';
 import './TaskbarWindow.css';
 
-function TaskbarWindow({ title, isActive, isMinimized, onClick }) {
+const iconMap = {
+  about: 'user',
+  contact: 'mailbox',
+  projects: 'folder',
+  skills: 'paintbrush',
+};
+
+function TaskbarWindow({ title, isActive, isMinimized, onClick, content }) {
+  const iconName = iconMap[content] || 'folder';
+  
   return (
     <button
       className={`taskbar-window ${isActive ? 'active' : ''} ${isMinimized ? 'minimized' : ''}`}
       onClick={onClick}
     >
-      <Icon emoji="📄" className="window-icon" />
+      <Icon name={iconName} size={16} className="window-icon" />
       <span className="window-title">{title}</span>
     </button>
   );

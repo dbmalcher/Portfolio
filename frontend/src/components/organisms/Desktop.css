@@ -3,7 +3,7 @@
 .desktop-background {
   width: 100vw;
   height: calc(100vh - var(--taskbar-height));
-  background: var(--gradient-taskbar);
+  background: linear-gradient(79.74deg, #9CB4E0 0.68%, #6A5BF3 100%);
   position: relative;
   overflow: hidden;
 }

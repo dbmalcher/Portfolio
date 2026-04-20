@@ -4,68 +4,77 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: var(--desktop-icon-width);
-  padding: var(--spacing-sm);
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  padding: 8px;
   cursor: pointer;
-  border: var(--border-transparent);
+  border-radius: 8px;
+  transition: all 0.2s;
 }
 
 .desktop-icon:hover {
-  background: rgba(0, 0, 0, 0.2);
-  border: var(--border-light-hover);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.desktop-icon.active {
+  background: linear-gradient(135deg, rgba(106, 91, 243, 0.7) 0%, rgba(177, 195, 233, 0.5) 100%);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(106, 91, 243, 0.4);
 }
 
 .desktop-icon-image {
-  font-size: var(--icon-size-desktop);
-  margin-bottom: var(--spacing-sm);
+  font-size: 36px;
+  margin-bottom: 6px;
   text-shadow: var(--shadow-icon);
 }
 
 .desktop-icon-label {
   color: var(--color-text-white);
-  font-size: var(--font-size-base);
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
   text-align: center;
   text-shadow: var(--shadow-text-strong), -1px -1px 1px rgba(0, 0, 0, 0.4);
   word-wrap: break-word;
   max-width: 70px;
 }
 
-.desktop-icon:active .desktop-icon-label {
-  background: rgba(0, 0, 255, 0.3);
-}
-
-.desktop-icon.active .desktop-icon-label {
-  background: rgba(0, 0, 128, 0.5);
+.desktop-icon:active {
+  transform: scale(0.95);
 }
 
 @media (max-width: 1024px) {
   .desktop-icon {
-    width: var(--desktop-icon-width-md);
+    width: 80px;
+    height: 80px;
   }
   
   .desktop-icon-image {
-    font-size: var(--icon-size-2xl);
+    font-size: 32px;
   }
   
   .desktop-icon-label {
-    font-size: var(--font-size-sm);
+    font-size: 12px;
     max-width: 60px;
   }
 }
 
 @media (max-width: 768px) {
   .desktop-icon {
-    width: var(--desktop-icon-width-sm);
-    padding: var(--spacing-xs);
+    width: 70px;
+    height: 70px;
+    padding: 6px;
   }
   
   .desktop-icon-image {
-    font-size: var(--icon-size-xl);
-    margin-bottom: var(--spacing-xs);
+    font-size: 28px;
+    margin-bottom: 4px;
   }
   
   .desktop-icon-label {
-    font-size: var(--font-size-xs);
-    max-width: 55px;
+    font-size: 11px;
+    max-width: 50px;
   }
 }

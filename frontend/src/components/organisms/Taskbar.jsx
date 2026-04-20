@@ -2,8 +2,10 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import Icon from '../atoms/Icon';
 import Clock from '../atoms/Clock';
 import LanguageToggle from '../atoms/LanguageToggle';
+import VolumeButton from '../atoms/VolumeButton';
 import TaskbarWindow from '../molecules/TaskbarWindow';
 import StartMenu from './StartMenu';
+import { initAudio } from '../../utils/sounds';
 import './Taskbar.css';
 
 function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStartMenu, onOpenWindow }) {
@@ -12,7 +14,7 @@ function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStart
   const openWindows = windows.filter(w => w.isOpen);
 
   return (
-    <div className="taskbar">
+    <div className="taskbar" onClick={initAudio}>
       <StartMenu 
         isOpen={showStartMenu} 
         onClose={() => onStartClick()}
@@ -23,8 +25,10 @@ function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStart
         className={`start-button ${showStartMenu ? 'active' : ''}`}
         onClick={onStartClick}
       >
-        <Icon emoji="🪟" className="start-icon" />
-        <span className="start-text">{t('start')}</span>
+        <div className="start-icon-wrapper">
+          <Icon name="house" size={28} className="start-icon-blur" weight="fill" />
+          <Icon name="house" size={28} className="start-icon" weight="fill" />
+        </div>
       </button>
       
       <div className="taskbar-divider"></div>
@@ -34,6 +38,7 @@ function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStart
           <TaskbarWindow
             key={win.id}
             title={t(win.content)}
+            content={win.content}
             isActive={activeWindow === win.id && !win.isMinimized}
             isMinimized={win.isMinimized}
             onClick={() => onWindowClick(win.id)}
@@ -43,7 +48,7 @@ function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStart
       
       <div className="taskbar-tray">
         <LanguageToggle language={language} onToggle={toggleLanguage} />
-        <Icon emoji="🔊" className="tray-icon" />
+        <VolumeButton />
         <Clock language={language} />
       </div>
     </div>

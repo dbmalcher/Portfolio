@@ -4,16 +4,15 @@ import MenuItem from '../molecules/MenuItem';
 import './StartMenu.css';
 
 const menuItems = [
-  { id: 'about', icon: '👤' },
-  { id: 'projects', icon: '📁' },
-  { id: 'contact', icon: '✉️' },
-  { id: 'skills', icon: '⚡' },
+  { id: 'about', icon: 'user' },
+  { id: 'contact', icon: 'mailbox' },
+  { id: 'projects', icon: 'folder' },
 ];
 
 const rightMenuItems = [
-  { labelKey: 'myDocuments', icon: '📂' },
-  { labelKey: 'images', icon: '🖼️' },
-  { labelKey: 'settings', icon: '⚙️' },
+  { labelKey: 'myDocuments', icon: 'folder' },
+  { labelKey: 'images', icon: 'globe' },
+  { labelKey: 'settings', icon: 'paintbrush' },
 ];
 
 function StartMenu({ isOpen, onClose, onOpenWindow }) {
@@ -25,7 +24,7 @@ function StartMenu({ isOpen, onClose, onOpenWindow }) {
     <div className="start-menu">
       <div className="start-menu-left">
         <div className="user-panel">
-          <Icon emoji="👤" className="user-avatar" />
+          <Icon name="user" size={32} className="user-avatar" />
           <span className="user-name">{t('Daniel')}</span>
         </div>
         <div className="menu-items">

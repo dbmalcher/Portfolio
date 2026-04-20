@@ -3,35 +3,38 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import WindowTitleBar from '../molecules/WindowTitleBar';
 import './Window.css';
 
-function Window({ id, titleContent, isActive, isMinimized, position, onClose, onMinimize, onFocus, onPositionChange, children }) {
+function Window({ id, titleContent, isActive, isMinimized, position, onClose, onMinimize, onFocus, onPositionChange, width, height, noWhiteBg, children }) {
   const { t } = useLanguage();
   const [localPosition, setLocalPosition] = useState(position);
   const [isDragging, setIsDragging] = useState(false);
-  const dragStartRef = useRef({ x: 0, y: 0, windowX: 0, windowY: 0 });
+  const dragStartRef = useRef({ x: 0, y: 0, windowX: 0, windowY: 0, windowWidth: 0, windowHeight: 0 });
   const windowRef = useRef(null);
 
-  const clampPosition = (pos) => {
+  const windowWidth = width || 400;
+  const windowHeight = height || 300;
+
+  const clampPosition = (pos, fixedWidth, fixedHeight) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const titlebarHeight = 28;
+    const titlebarHeight = 40;
     
-    const windowWidth = windowRef.current?.offsetWidth || 400;
-    const windowHeight = windowRef.current?.offsetHeight || 300;
+    const w = fixedWidth || windowWidth;
+    const h = fixedHeight || windowHeight;
     
     let adjustedX = pos.x;
     let adjustedY = pos.y;
     
     if (adjustedX < 0) adjustedX = 0;
-    if (adjustedX + windowWidth > viewportWidth) {
-      adjustedX = viewportWidth - windowWidth;
+    if (adjustedX + w > viewportWidth) {
+      adjustedX = viewportWidth - w;
     }
     
     if (adjustedY < 0) adjustedY = 0;
     if (adjustedY + titlebarHeight > viewportHeight - 40) {
       adjustedY = viewportHeight - 40 - titlebarHeight;
     }
-    if (adjustedY + windowHeight > viewportHeight - 40) {
-      adjustedY = viewportHeight - 40 - windowHeight;
+    if (adjustedY + h > viewportHeight - 40) {
+      adjustedY = viewportHeight - 40 - h;
     }
     
     return { x: adjustedX, y: adjustedY };
@@ -57,7 +60,11 @@ function Window({ id, titleContent, isActive, isMinimized, position, onClose, on
         const newX = dragStartRef.current.windowX + (e.clientX - dragStartRef.current.x);
         const newY = dragStartRef.current.windowY + (e.clientY - dragStartRef.current.y);
         
-        const clamped = clampPosition({ x: newX, y: newY });
+        const clamped = clampPosition(
+          { x: newX, y: newY }, 
+          dragStartRef.current.windowWidth, 
+          dragStartRef.current.windowHeight
+        );
         setLocalPosition(clamped);
       }
     };
@@ -83,11 +90,14 @@ function Window({ id, titleContent, isActive, isMinimized, position, onClose, on
   const handleMouseDown = (e) => {
     if (e.target.closest('.window-btn')) return;
     
+    const rect = windowRef.current?.getBoundingClientRect();
     dragStartRef.current = {
       x: e.clientX,
       y: e.clientY,
       windowX: localPosition.x,
-      windowY: localPosition.y
+      windowY: localPosition.y,
+      windowWidth: rect?.width || 400,
+      windowHeight: rect?.height || 300
     };
     setIsDragging(true);
     onFocus();
@@ -105,18 +115,25 @@ function Window({ id, titleContent, isActive, isMinimized, position, onClose, on
       style={{
         left: localPosition.x,
         top: localPosition.y,
+        width: windowWidth,
+        height: windowHeight,
       }}
     >
-      <WindowTitleBar 
-        title={t(titleContent)}
-        isActive={isActive}
-        onClose={onClose}
-        onMinimize={onMinimize}
-        onFocus={onFocus}
-        onMouseDown={handleMouseDown}
-      />
-      <div className="window-content">
-        {children}
+      <div className="window-header">
+        <WindowTitleBar 
+          title={t(titleContent)}
+          content={titleContent}
+          isActive={isActive}
+          onClose={onClose}
+          onMinimize={onMinimize}
+          onFocus={onFocus}
+          onMouseDown={handleMouseDown}
+        />
+      </div>
+      <div className={`window-body ${noWhiteBg ? 'no-bg' : ''}`}>
+        <div className={`window-content ${noWhiteBg ? 'no-bg' : ''}`}>
+          {children}
+        </div>
       </div>
     </div>
   );
