@@ -202,7 +202,7 @@ function AboutMe() {
             <>
               <div className="about-header">
                 <div className="about-photo">
-                  <span className="photo-placeholder">📷</span>
+                  <img src="/img/perfil.jpg" alt="Daniel" className="about-profile-photo" />
                 </div>
                 <div className="about-info">
                   <h2 className="about-name">Daniel Benoliel Malcher</h2>

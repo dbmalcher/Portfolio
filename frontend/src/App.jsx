@@ -5,7 +5,7 @@ import Taskbar from './components/organisms/Taskbar';
 import Window from './components/organisms/Window';
 import AboutMe from './components/organisms/AboutMe';
 import ContactMe from './components/organisms/ContactMe';
-import { sounds, initAudio, setVolume as setSoundVolume, updateFanVolume } from './utils/sounds';
+import { sounds, initAudio, setVolume, setSoundEnabled, getVolume, isSoundEnabled } from './utils/sounds';
 import './styles.css';
 
 const WINDOW_WIDTH = 400;
@@ -174,11 +174,22 @@ function AppContent() {
 
   useEffect(() => {
     initAudio();
+  }, []);
+
+  useEffect(() => {
+    if (!showStartMenu) return;
     
-    setTimeout(() => {
-      sounds.startFan();
-    }, 2000);
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.start-menu') && !e.target.closest('.start-button')) {
+        setShowStartMenu(false);
+      }
+    };
     
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showStartMenu]);
+
+  useEffect(() => {
     const handleResize = () => {
       setWindows(prevWindows => {
         const viewportWidth = window.innerWidth;
@@ -208,7 +219,6 @@ function AppContent() {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
-      sounds.stopFan();
     };
   }, []);
 
@@ -273,6 +283,13 @@ function AppContent() {
     setWindows(windows.map(w => w.id === id ? { ...w, position } : w));
   };
 
+  const closeStartMenu = () => {
+    if (showStartMenu) {
+      sounds.click();
+      setShowStartMenu(false);
+    }
+  };
+
   const toggleStartMenu = () => {
     sounds.start();
     setShowStartMenu(!showStartMenu);
@@ -302,8 +319,8 @@ function AppContent() {
             onMinimize={() => minimizeWindow(win.id)}
             onFocus={() => setActiveWindow(win.id)}
             onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
-            width={isAbout ? 600 : isContact ? 350 : undefined}
-            height={isAbout ? 500 : isContact ? 340 : undefined}
+            width={isAbout ? 700 : isContact ? 350 : undefined}
+            height={isAbout ? 550 : isContact ? 340 : undefined}
             noWhiteBg={isAbout}
           >
             <WindowContent content={win.content} />

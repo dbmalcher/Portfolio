@@ -1,4 +1,4 @@
-import { User, UserCircle, EnvelopeSimple, Folder, PaintBrush, Globe, Door, House, SpeakerSimpleHigh, SpeakerSimpleX, SpeakerSimpleSlash, GithubLogo, LinkedinLogo, Phone, ChatsCircle } from '@phosphor-icons/react';
+import { User, UserCircle, EnvelopeSimple, Folder, PaintBrush, Globe, Door, House, SpeakerSimpleHigh, SpeakerSimpleX, SpeakerSimpleSlash, SpeakerSimpleLow, GithubLogo, LinkedinLogo, Phone, ChatsCircle } from '@phosphor-icons/react';
 
 const iconMap = {
   user: User,
@@ -12,6 +12,7 @@ const iconMap = {
   'speaker-high': SpeakerSimpleHigh,
   'speaker-x': SpeakerSimpleX,
   'speaker-slash': SpeakerSimpleSlash,
+  'speaker-low': SpeakerSimpleLow,
   email: EnvelopeSimple,
   github: GithubLogo,
   linkedin: LinkedinLogo,

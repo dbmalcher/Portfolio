@@ -1,141 +1,155 @@
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let audioContext = null;
+
+const getAudioContext = () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return audioContext;
+};
 
 let globalVolume = 0.5;
 let soundEnabled = true;
-let computerAudio = null;
-let computerLoopAudio = null;
-let fanInterval = null;
 
-const loadComputerAudio = () => {
-  if (!computerAudio) {
-    computerAudio = new Audio('/sounds/computer.mp3');
-    computerAudio.volume = 0.5;
-  }
-  return computerAudio;
-};
-
-const loadComputerLoopAudio = () => {
-  if (!computerLoopAudio) {
-    computerLoopAudio = new Audio('/sounds/computer-loop.mp3');
-    computerLoopAudio.volume = 0.4;
-    computerLoopAudio.loop = true;
-  }
-  return computerLoopAudio;
-};
-
-const createFanSound = () => {
-  if (!soundEnabled || globalVolume === 0) return null;
-  
-  try {
-    const bufferSize = audioContext.sampleRate * 2;
-    const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-    const data = buffer.getChannelData(0);
-    
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * 0.3;
-    }
-    
-    const noise = audioContext.createBufferSource();
-    noise.buffer = buffer;
-    noise.loop = true;
-    
-    const gainNode = audioContext.createGain();
-    const filter = audioContext.createBiquadFilter();
-    
-    filter.type = 'lowpass';
-    filter.frequency.value = 400;
-    
-    noise.connect(filter);
-    filter.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    gainNode.gain.setValueAtTime(globalVolume * 0.08, audioContext.currentTime);
-    
-    return { noise, gainNode };
-  } catch (e) {
-    return null;
-  }
-};
-
-export const setVolume = (vol) => {
-  globalVolume = Math.max(0, Math.min(1, vol));
-  if (fanInterval && fanInterval.gainNode) {
-    fanInterval.gainNode.gain.setValueAtTime(globalVolume * 0.15, audioContext.currentTime);
-  }
-};
-
-export const getVolume = () => globalVolume;
-export const setSoundEnabled = (enabled) => { soundEnabled = enabled; };
-export const isSoundEnabled = () => soundEnabled;
-
+// Audio elements
 let clickAudio = null;
 
+// Carregar áudio de clique
 const loadClickAudio = () => {
   if (!clickAudio) {
     clickAudio = new Audio('/sounds/click.mp3');
-    clickAudio.volume = 0.4;
   }
   return clickAudio;
 };
 
+// Função para tocar tom sintético
+const playTone = (freq, duration, type = 'sine', vol = 0.25) => {
+  if (!soundEnabled || globalVolume === 0) return;
+  
+  try {
+    const ctx = getAudioContext();
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+    
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = type;
+    osc.frequency.value = freq;
+    
+    gain.gain.setValueAtTime(vol * globalVolume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  } catch (e) {}
+};
+
+export const setVolume = (vol) => {
+  globalVolume = Math.max(0, Math.min(1, vol));
+  localStorage.setItem('portfolio-volume', globalVolume.toString());
+};
+
+export const getVolume = () => globalVolume;
+
+export const setSoundEnabled = (enabled) => { 
+  soundEnabled = enabled;
+  localStorage.setItem('portfolio-soundEnabled', enabled.toString());
+};
+
+export const isSoundEnabled = () => soundEnabled;
+
+// Inicializa volume do localStorage
+export const initVolume = () => {
+  const savedVolume = localStorage.getItem('portfolio-volume');
+  if (savedVolume) {
+    globalVolume = parseFloat(savedVolume);
+  }
+  
+  const savedEnabled = localStorage.getItem('portfolio-soundEnabled');
+  if (savedEnabled !== null) {
+    soundEnabled = savedEnabled === 'true';
+  }
+};
+
 export const sounds = {
   click: () => {
+    if (!soundEnabled || globalVolume === 0) return;
     try {
       const audio = loadClickAudio();
       audio.currentTime = 0;
-      audio.playbackRate = 0.9 + Math.random() * 0.2;
-      audio.volume = 0.3 + Math.random() * 0.2;
+      audio.volume = globalVolume;
       audio.play();
     } catch (e) {}
   },
+  
   open: () => {
-    playTone(400, 0.1, 'sine', 0.25);
-    setTimeout(() => playTone(600, 0.15, 'sine', 0.2), 80);
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(400, 0.08, 'sine', 0.2 * globalVolume);
+    setTimeout(() => playTone(600, 0.1, 'sine', 0.15 * globalVolume), 60);
   },
+  
   close: () => {
-    playTone(500, 0.08, 'sine', 0.2);
-    setTimeout(() => playTone(300, 0.1, 'sine', 0.15), 60);
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(500, 0.06, 'sine', 0.15 * globalVolume);
+    setTimeout(() => playTone(300, 0.08, 'sine', 0.1 * globalVolume), 40);
   },
+  
   minimize: () => {
-    playTone(600, 0.05, 'sine', 0.2);
-    setTimeout(() => playTone(400, 0.08, 'sine', 0.15), 40);
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(600, 0.04, 'sine', 0.15 * globalVolume);
+    setTimeout(() => playTone(400, 0.06, 'sine', 0.1 * globalVolume), 30);
   },
-  hover: () => playTone(1000, 0.03, 'sine', 0.1),
+  
+  maximize: () => {
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(400, 0.04, 'sine', 0.12 * globalVolume);
+    setTimeout(() => playTone(500, 0.06, 'sine', 0.15 * globalVolume), 30);
+    setTimeout(() => playTone(700, 0.08, 'sine', 0.12 * globalVolume), 60);
+  },
+  
+  hover: () => {
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(1000, 0.02, 'sine', 0.05 * globalVolume);
+  },
+  
   start: () => {
-    playTone(300, 0.1, 'sine', 0.25);
-    setTimeout(() => playTone(500, 0.1, 'sine', 0.2), 60);
-    setTimeout(() => playTone(700, 0.15, 'sine', 0.15), 120);
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(300, 0.08, 'sine', 0.2 * globalVolume);
+    setTimeout(() => playTone(500, 0.08, 'sine', 0.15 * globalVolume), 50);
+    setTimeout(() => playTone(700, 0.1, 'sine', 0.1 * globalVolume), 100);
   },
-  error: () => playTone(200, 0.15, 'square', 0.2),
-  computerOn: () => {},
-  startFan: () => {
-    if (fanInterval) return;
-    const fan = createFanSound();
-    if (fan) {
-      fan.noise.start();
-      fanInterval = fan;
-    }
+  
+  error: () => {
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(200, 0.1, 'square', 0.15 * globalVolume);
+    setTimeout(() => playTone(150, 0.15, 'square', 0.1 * globalVolume), 100);
   },
-  stopFan: () => {
-    if (fanInterval) {
-      try { fanInterval.noise.stop(); } catch (e) {}
-      fanInterval = null;
-    }
+  
+  notification: () => {
+    if (!soundEnabled || globalVolume === 0) return;
+    playTone(600, 0.05, 'sine', 0.1 * globalVolume);
+    setTimeout(() => playTone(800, 0.08, 'sine', 0.12 * globalVolume), 80);
   },
 };
 
 export const initAudio = () => {
-  if (audioContext.state === 'suspended') {
-    audioContext.resume();
+  initVolume();
+  
+  const ctx = getAudioContext();
+  if (ctx.state === 'suspended') {
+    ctx.resume();
   }
   
+  // Adiciona listener de clique global
   document.addEventListener('click', () => {
     sounds.click();
   }, { capture: true });
 };
 
-export const updateFanVolume = () => {
-  if (fanInterval && fanInterval.gainNode) {
-    fanInterval.gainNode.gain.setValueAtTime(globalVolume * 0.15, audioContext.currentTime);
-  }
+export const updateVolumeDisplay = () => {
+  return globalVolume;
 };

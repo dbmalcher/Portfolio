@@ -5,7 +5,6 @@ import LanguageToggle from '../atoms/LanguageToggle';
 import VolumeButton from '../atoms/VolumeButton';
 import TaskbarWindow from '../molecules/TaskbarWindow';
 import StartMenu from './StartMenu';
-import { initAudio } from '../../utils/sounds';
 import './Taskbar.css';
 
 function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStartMenu, onOpenWindow }) {
@@ -14,7 +13,7 @@ function Taskbar({ windows, activeWindow, onWindowClick, onStartClick, showStart
   const openWindows = windows.filter(w => w.isOpen);
 
   return (
-    <div className="taskbar" onClick={initAudio}>
+    <div className="taskbar">
       <StartMenu 
         isOpen={showStartMenu} 
         onClose={() => onStartClick()}
