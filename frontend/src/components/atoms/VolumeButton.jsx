@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Icon from './Icon';
-import { getVolume, setVolume, isSoundEnabled, setSoundEnabled, sounds, initVolume, updateVolumeDisplay } from '../../utils/sounds';
+import { getVolume, setVolume, isSoundEnabled, setSoundEnabled, sounds, initVolume, startMusic, stopMusic, getMusicAudio } from '../../utils/sounds';
 import './VolumeButton.css';
 
 function VolumeButton() {
@@ -18,6 +18,17 @@ function VolumeButton() {
     const newVol = parseFloat(e.target.value);
     setVolume(newVol);
     setVolumeState(newVol);
+    
+    if (getMusicAudio()) {
+      getMusicAudio().volume = newVol;
+    }
+    
+    if (newVol > 0 && enabled) {
+      startMusic();
+    } else if (newVol === 0) {
+      stopMusic();
+    }
+    
     sounds.click();
   };
 
@@ -25,9 +36,15 @@ function VolumeButton() {
     const newEnabled = !enabled;
     setEnabledState(newEnabled);
     setSoundEnabled(newEnabled);
-    if (newEnabled) {
-      sounds.click();
+    
+    if (newEnabled && getVolume() > 0) {
+      startMusic();
+    } else {
+      stopMusic();
     }
+    
+    setShowPanel(false);
+    sounds.click();
   };
 
   const getVolumeIcon = () => {

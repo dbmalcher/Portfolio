@@ -9,9 +9,12 @@ const getAudioContext = () => {
 
 let globalVolume = 0.5;
 let soundEnabled = true;
+let musicStarted = false;
+let wallpaperChanged = false;
 
 // Audio elements
 let clickAudio = null;
+let musicAudio = null;
 
 // Carregar áudio de clique
 const loadClickAudio = () => {
@@ -19,6 +22,15 @@ const loadClickAudio = () => {
     clickAudio = new Audio('/sounds/click.mp3');
   }
   return clickAudio;
+};
+
+// Carregar música de fundo
+const loadMusicAudio = () => {
+  if (!musicAudio) {
+    musicAudio = new Audio('/sounds/music.mp3');
+    musicAudio.loop = true;
+  }
+  return musicAudio;
 };
 
 // Função para tocar tom sintético
@@ -51,16 +63,54 @@ const playTone = (freq, duration, type = 'sine', vol = 0.25) => {
 export const setVolume = (vol) => {
   globalVolume = Math.max(0, Math.min(1, vol));
   localStorage.setItem('portfolio-volume', globalVolume.toString());
+  
+  if (musicAudio && musicStarted) {
+    musicAudio.volume = globalVolume;
+  }
 };
 
 export const getVolume = () => globalVolume;
 
+export const startMusic = () => {
+  wallpaperChanged = true;
+  
+  if (musicStarted || globalVolume === 0) return;
+  
+  try {
+    const audio = loadMusicAudio();
+    audio.volume = globalVolume;
+    audio.play().catch(() => {});
+    musicStarted = true;
+  } catch (e) {}
+};
+
+export const stopMusic = () => {
+  if (musicAudio) {
+    musicAudio.pause();
+    musicAudio.currentTime = 0;
+    musicStarted = false;
+  }
+};
+
+export const getMusicAudio = () => musicAudio;
+
 export const setSoundEnabled = (enabled) => { 
   soundEnabled = enabled;
   localStorage.setItem('portfolio-soundEnabled', enabled.toString());
+  
+  if (!enabled && musicAudio) {
+    musicAudio.pause();
+    musicStarted = false;
+  }
 };
 
 export const isSoundEnabled = () => soundEnabled;
+
+export const setWallpaperChanged = (changed) => {
+  wallpaperChanged = changed;
+};
+
+export const getWallpaperChanged = () => wallpaperChanged;
 
 // Inicializa volume do localStorage
 export const initVolume = () => {

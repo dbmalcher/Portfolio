@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import DesktopIcon from '../molecules/DesktopIcon';
-import { sounds } from '../../utils/sounds';
+import { sounds, getWallpaperChanged } from '../../utils/sounds';
 import './Desktop.css';
 
 const desktopIcons = [
@@ -11,6 +12,14 @@ const desktopIcons = [
 
 function Desktop({ onOpenWindow, onFocusWindow, windows, activeWindow }) {
   const { t } = useLanguage();
+  const [wallpaper, setWallpaper] = useState(false);
+
+  useEffect(() => {
+    const checkWallpaper = () => setWallpaper(getWallpaperChanged());
+    checkWallpaper();
+    const interval = setInterval(checkWallpaper, 500);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleClick = (iconId) => {
     const label = t(iconId);
@@ -32,8 +41,12 @@ function Desktop({ onOpenWindow, onFocusWindow, windows, activeWindow }) {
     sounds.hover();
   };
 
+  const backgroundStyle = wallpaper 
+    ? { background: 'url(/img/desktop.jpg) center/cover no-repeat' }
+    : {};
+
   return (
-    <div className="desktop-background">
+    <div className="desktop-background" style={backgroundStyle}>
       <div className="desktop-icons">
         {desktopIcons.map((icon) => {
           const existingWindow = windows.find(w => w.content === icon.id);
