@@ -1,0 +1,128 @@
+@import '../atoms/tokens.css';
+
+.window-navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #f0f0f0 0%, #e8e8e8 100%);
+  border-bottom: 1px solid #c0c0c0;
+  min-height: 34px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 22px;
+  border: 1px solid #7f9db9;
+  background: linear-gradient(180deg, #fff 0%, #ececec 50%, #dcdcdc 100%);
+  border-radius: 3px;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: all 0.1s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #fff 0%, #d0e8ff 50%, #b8daff 100%);
+  border-color: #3a80d4;
+}
+
+.nav-btn:active:not(:disabled) {
+  background: linear-gradient(180deg, #c0d8f0 0%, #a8d0f8 50%, #90c0e8 100%);
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.breadcrumb-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: #1a1a1a;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.1s ease;
+}
+
+.breadcrumb-home:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb-separator {
+  color: #808080;
+  font-size: 12px;
+  margin: 0 2px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb-link {
+  background: transparent;
+  border: none;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #1a1a1a;
+  cursor: pointer;
+  border-radius: 2px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background 0.1s ease;
+}
+
+.breadcrumb-link:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb-link:disabled {
+  cursor: default;
+  font-weight: 600;
+  color: #404040;
+}
+
+.breadcrumb-link:last-child {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .window-navigation {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .nav-btn {
+    width: 24px;
+    height: 20px;
+  }
+
+  .breadcrumb-link {
+    max-width: 100px;
+    font-size: 11px;
+  }
+}

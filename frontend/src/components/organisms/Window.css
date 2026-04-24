@@ -27,6 +27,11 @@
   width: 100%;
 }
 
+.window-navigation-wrapper {
+  display: flex;
+  width: 100%;
+}
+
 .window-body {
   display: flex;
   flex-direction: column;

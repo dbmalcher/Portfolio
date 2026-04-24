@@ -1,0 +1,153 @@
+# Windows 7 Portfolio - Contexto do Projeto
+
+## Visão Geral
+Portfolio pessoal estilo Windows 7 construído com React. O projeto simula um desktop do Windows 7 funcional com janelas arrastáveis, menu iniciar, barra de tarefas e sistema de som.
+
+## Stack Tecnológico
+- React 18
+- Phosphor Icons (@phosphor-icons/react)
+- CSS Modules
+- Vite (build tool)
+
+## Estrutura de Arquivos
+
+```
+frontend/
+├── src/
+│   ├── App.jsx                    # App principal com gerenciamento de janelas
+│   ├── main.jsx                   # Entry point
+│   ├── components/
+│   │   ├── atoms/
+│   │   │   ├── tokens.css         # Design tokens (cores, fontes)
+│   │   │   ├── Icon.jsx           # Componente de ícones Phosphor
+│   │   │   └── VolumeButton.jsx   # Controle de volume
+│   │   ├── molecules/
+│   │   │   └── MenuItem.css        # Estilo dos itens de menu
+│   │   └── organisms/
+│   │       ├── Taskbar.css / Taskbar.jsx
+│   │       ├── StartMenu.css / StartMenu.jsx
+│   │       ├── Desktop.css / Desktop.jsx
+│   │       ├── Window.css / Window.jsx
+│   │       ├── AboutMe.css / AboutMe.jsx
+│   │       └── Projects.jsx        # JANELA DE PROJETOS
+│   ├── i18n/
+│   │   └── translations.js         # Traduções EN/PT
+│   └── utils/
+│       └── sounds.js               # Sistema de áudio
+├── public/
+│   ├── img/
+│   │   ├── perfil.jpg              # Foto de perfil
+│   │   └── desktop.jpg             # Papel de parede
+│   └── sounds/
+│       ├── click.mp3
+│       ├── hover.mp3
+│       ├── open.mp3
+│       ├── close.mp3
+│       └── music.mp3               # Música de fundo
+```
+
+## Funcionalidades Implementadas
+
+### 1. Sistema de Janelas
+- Janelas arrastáveis (draggable)
+- Múltiplas janelas abertas simultaneamente
+- Z-index para sobreposição
+- Estados: minimized, maximized, normal
+
+### 2. Sistema de Áudio
+- Sons de click, hover, open, close
+- Música de fundo (music.mp3)
+- Controle de volume global
+- wallpapers diferentes para quando mutado/unmutado
+
+### 3. Sistema Bilingue (i18n)
+- Suporte EN e PT
+- Toggle de idioma no menu iniciar
+- Função `t()` para traduções
+
+### 4. Start Menu
+- Glass morphism
+- Botão iniciar com gradiente roxo
+- Itens de menu estilizados
+
+### 5. Sobre/About Me
+- Foto de perfil (perfil.jpg)
+- Posição ajustada: object-position: 50% 95%
+
+## Tarefas Pendentes
+
+### CRÍTICO: Componente WindowNavigation
+Criar componente de navegação para a janela de Projetos (Projects) com:
+
+1. **Localização:** Entre `window-header` e `window-body`
+2. **Elementos:**
+   - Dois botões de seta (anterior/próximo)
+   - Breadcrumb mostrando histórico de navegação
+3. **Estilo:** Deve seguir o design do Figma
+   - Link Figma: https://www.figma.com/design/r8wb2b9YjJFTHYNOhJBrZG/Portfolio-2.0
+   - Node específico para navegação: 70-335
+
+4. **Funcionalidade:**
+   - Botões anterior/próximo para navegar entre projetos
+   - Breadcrumb mostrando caminho de navegação
+   - Histórico de navegação
+
+5. **Tecnologias:**
+   - Usar Phosphor Icons de @phosphor-icons/react
+   - Seguir sistema i18n (usar função `t()`)
+   - Integração com LanguageContext
+
+### Notas sobre Figma MCP
+- Tentativas de conectar ao MCP do Figma falharam
+- Servidor local em http://127.0.0.1:3845/mcp foi testado mas tem limitações de sessão
+- Recomenda-se descrevera estética desejada ou obter screenshot do design
+
+## Comandos Úteis
+
+```bash
+# Instalar dependências
+npm install
+
+# Rodar desenvolvimento
+npm run dev
+
+# Build
+npm run build
+```
+
+## Referências de Código
+
+### Como usar Phosphor Icons
+```jsx
+import { Icon } from '@phosphor-icons/react';
+<Icon name="arrow-left" weight="bold" />
+```
+
+### Como usar traduções
+```jsx
+import { useLanguage } from './contexts/LanguageContext';
+const { t } = useLanguage();
+<button>{t('previous')}</button>
+```
+
+### Estrutura de janela existente
+```jsx
+<Window title="Projects">
+  <WindowHeader title={t('projects')} />
+  <WindowNavigation />  {/* ← ADICIONAR AQUI */}
+  <WindowBody>
+    <ProjectsContent />
+  </WindowBody>
+</Window>
+```
+
+## Próximos Passos
+1. Obter especificação visual do componente de navegação (do Figma ou descrição)
+2. Criar componente WindowNavigation.jsx
+3. Criar estilo WindowNavigation.css
+4. Integrar na janela de Projects
+5. Implementar lógica de navegação
+
+---
+
+**Última atualização:** 22/04/2026

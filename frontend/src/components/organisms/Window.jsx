@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import WindowTitleBar from '../molecules/WindowTitleBar';
+import WindowNavigation from '../molecules/WindowNavigation';
 import './Window.css';
 
-function Window({ id, titleContent, isActive, isMinimized, position, onClose, onMinimize, onFocus, onPositionChange, width, height, noWhiteBg, children }) {
+function Window({ id, titleContent, isActive, isMinimized, position, onClose, onMinimize, onFocus, onPositionChange, width, height, noWhiteBg, navigation, children }) {
   const { t } = useLanguage();
   const [localPosition, setLocalPosition] = useState(position);
   const [isDragging, setIsDragging] = useState(false);
@@ -130,6 +131,11 @@ function Window({ id, titleContent, isActive, isMinimized, position, onClose, on
           onMouseDown={handleMouseDown}
         />
       </div>
+      {navigation && (
+        <div className="window-navigation-wrapper">
+          <WindowNavigation {...navigation} />
+        </div>
+      )}
       <div className={`window-body ${noWhiteBg ? 'no-bg' : ''}`}>
         <div className={`window-content ${noWhiteBg ? 'no-bg' : ''}`}>
           {children}

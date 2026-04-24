@@ -5,6 +5,7 @@ import Taskbar from './components/organisms/Taskbar';
 import Window from './components/organisms/Window';
 import AboutMe from './components/organisms/AboutMe';
 import ContactMe from './components/organisms/ContactMe';
+import Projects from './components/organisms/Projects';
 import { sounds, initAudio, setVolume, setSoundEnabled, getVolume, isSoundEnabled } from './utils/sounds';
 import './styles.css';
 
@@ -305,8 +306,26 @@ function AppContent() {
       />
       
       {windows.map(win => {
+        const isProjects = win.content === 'projects';
+        
+        if (isProjects) {
+          return (
+            <Projects 
+              key={win.id}
+              isActive={activeWindow === win.id}
+              isMinimized={win.isMinimized}
+              position={win.position}
+              onClose={() => closeWindow(win.id)}
+              onMinimize={() => minimizeWindow(win.id)}
+              onFocus={() => setActiveWindow(win.id)}
+              onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
+            />
+          );
+        }
+        
         const isAbout = win.content === 'about';
         const isContact = win.content === 'contact';
+        
         return (
           <Window
             key={win.id}
