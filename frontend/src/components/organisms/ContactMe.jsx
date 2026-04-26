@@ -15,7 +15,7 @@ function ContactMe() {
 
   return (
     <div className="contact-me">
-      <h2 className="contact-title">{t('contact')}</h2>
+      <h2 className="contact-title">{t('getInTouch')}</h2>
       <div className="contact-list">
         {contacts.map((contact) => (
           <div key={contact.type} className="contact-item">

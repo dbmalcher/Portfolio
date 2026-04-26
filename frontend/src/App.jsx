@@ -5,6 +5,7 @@ import Taskbar from './components/organisms/Taskbar';
 import Window from './components/organisms/Window';
 import AboutMe from './components/organisms/AboutMe';
 import ContactMe from './components/organisms/ContactMe';
+import ProjectsWindow from './components/organisms/ProjectsWindow';
 import Projects from './components/organisms/Projects';
 import { sounds, initAudio, setVolume, setSoundEnabled, getVolume, isSoundEnabled } from './utils/sounds';
 import './styles.css';
@@ -150,12 +151,7 @@ function WindowContent({ content }) {
     case 'about':
       return <AboutMe />;
     case 'projects':
-      return (
-        <div style={{ padding: '20px', color: '#000' }}>
-          <h2 style={{ marginBottom: '15px', fontSize: '24px' }}>{t('projects')}</h2>
-          <p>{t('comingSoon')}</p>
-        </div>
-      );
+      return <ProjectsWindow />;
     case 'contact':
       return <ContactMe />;
     default:
@@ -240,7 +236,7 @@ function AppContent() {
         contentId,
         isOpen: true, 
         isMinimized: false,
-        position: { x: 100 + offset, y: 50 + offset }
+        position: { x: 100 + offset, y: -50 + offset }
       }]);
       setActiveWindow(newId);
     }
@@ -306,12 +302,16 @@ function AppContent() {
       />
       
       {windows.map(win => {
+        const isAbout = win.content === 'about';
+        const isContact = win.content === 'contact';
         const isProjects = win.content === 'projects';
-        
+
         if (isProjects) {
           return (
-            <Projects 
+            <Window
               key={win.id}
+              id={win.id}
+              titleContent="projects"
               isActive={activeWindow === win.id}
               isMinimized={win.isMinimized}
               position={win.position}
@@ -319,13 +319,15 @@ function AppContent() {
               onMinimize={() => minimizeWindow(win.id)}
               onFocus={() => setActiveWindow(win.id)}
               onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
-            />
+              width={1300}
+              height={800}
+              noWhiteBg={true}
+            >
+              <ProjectsWindow />
+            </Window>
           );
         }
-        
-        const isAbout = win.content === 'about';
-        const isContact = win.content === 'contact';
-        
+
         return (
           <Window
             key={win.id}
@@ -338,16 +340,16 @@ function AppContent() {
             onMinimize={() => minimizeWindow(win.id)}
             onFocus={() => setActiveWindow(win.id)}
             onPositionChange={(pos) => updateWindowPosition(win.id, pos)}
-            width={isAbout ? 700 : isContact ? 350 : undefined}
-            height={isAbout ? 550 : isContact ? 340 : undefined}
-            noWhiteBg={isAbout}
+            width={isAbout ? 700 : isContact ? 350 : isProjects ? 1300 : undefined}
+            height={isAbout ? 550 : isContact ? 340 : isProjects ? 800 : undefined}
+            noWhiteBg={isAbout || isProjects}
           >
             <WindowContent content={win.content} />
           </Window>
         );
-      })}
+})}
       
-      <Taskbar 
+      <Taskbar
         windows={windows} 
         activeWindow={activeWindow}
         onWindowClick={(id) => {

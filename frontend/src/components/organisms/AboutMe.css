@@ -172,6 +172,18 @@
   padding: 16px;
 }
 
+.education-section .education-group {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.education-section .education-group:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
 .section-title {
   font-family: 'Syne', sans-serif;
   font-size: 18px;
@@ -251,5 +263,16 @@
   color: #666666;
   margin: 0;
   line-height: 1.6;
-  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-item {
+  display: block;
+}
+
+.task-item strong {
+  font-weight: 600;
+  color: #3a3a3a;
 }

@@ -58,6 +58,13 @@ const experienceData = {
       period: 'August 2022 - December 2022',
       description: '• Full-Stack Development: Development of web system with IoT integration for medical equipment, ensuring real-time communication\n• Technologies: TypeScript, Node.JS, HTML, CSS, PostgreSQL\n• Problem Solving: Solving complex hardware-software integration problems, ensuring system stability',
     },
+    {
+      company: 'LUDUS Lab',
+      role: 'Mobile Game Developer (Unity C#)',
+      location: 'Manaus, AM',
+      period: 'March 2020 - August 2020',
+      description: '• Cross-Area Teamwork: Team composed of developers, artists, project managers, organizers, and marketing professionals\n• 2D Game Development: Development of singleplayer and multiplayer 2D games using Unity, creating code for player movement, world interaction, and Photon framework implementation for multiplayer functionality',
+    },
   ],
   pt: [
     {
@@ -94,6 +101,13 @@ const experienceData = {
       location: 'Manaus, AM',
       period: 'Agosto 2022 - Dezembro 2022',
       description: '• Desenvolvimento Full-Stack: Desenvolvimento de sistema web com integração IoT para equipamentos médicos, garantindo comunicação em tempo real\n• Tecnologias: TypeScript, Node.JS, HTML, CSS, PostgreSQL\n• Resolução de Problemas: Resolução de problemas complexos de integração hardware-software, garantindo estabilidade do sistema',
+    },
+    {
+      company: 'LUDUS Lab',
+      role: 'Desenvolvedor de Jogos Mobile (Unity C#)',
+      location: 'Manaus, AM',
+      period: 'Março 2020 - Agosto 2020',
+      description: '• Trabalho em Equipe Multidisciplinar: Equipe composta por desenvolvedores, artistas, gestores de projeto, organizadores e marketing\n• Desenvolvimento de Jogos 2D: Desenvolvimento de jogos 2D singleplayer e multiplayer usando Unity, criando código para movimentação de jogador, interação com o mundo e implementação do framework Photon para funcionalidade multiplayer',
     },
   ],
 };
@@ -182,6 +196,21 @@ function AboutMe() {
     { id: 'education', label: t('tabEducation') },
   ];
 
+  const renderDescription = (desc) => {
+    return desc.split('\n').map((line, idx) => {
+      if (!line.trim()) return null;
+      const match = line.match(/^•\s*([^:]+):(.+)$/);
+      if (match) {
+        return (
+          <span key={idx} className="task-item">
+            <strong>{match[1]}:</strong>{match[2]}
+          </span>
+        );
+      }
+      return <span key={idx}>{line}</span>;
+    });
+  };
+
   return (
     <div className="about-me">
       <div className="about-tabs">
@@ -239,7 +268,7 @@ function AboutMe() {
                     <span className="timeline-period">{exp.period}</span>
                     <h4 className="timeline-role">{exp.role}</h4>
                     <p className="timeline-company">{exp.company} · {exp.location}</p>
-                    <p className="timeline-tasks">{exp.description}</p>
+                    <p className="timeline-tasks">{renderDescription(exp.description)}</p>
                   </div>
                 </div>
               ))}
