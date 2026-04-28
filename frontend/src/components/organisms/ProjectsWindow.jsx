@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { CaretLeft, CaretRight, Folder, Folders, Star, Devices, Books, PenNib, CaretDown, CaretRight as NextIcon, CaretLeft as PrevIcon } from '@phosphor-icons/react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import './ProjectsWindow.css';
@@ -6,31 +6,11 @@ import './ProjectsWindow.css';
 const projectData = {
   en: [
     { id: 1, name: 'Atomic Design System', category: 'design-systems', isFavorite: true, image: '/projects/atomic-design-system/thumbnail.png', context: 'Development of an Atomic Design-based Design System, with creation of tokens, reusable components and structuring of a React library. The project aimed to accelerate the front-end team\'s work, reduce inconsistencies between products and strengthen collaboration between design and engineering. To develop the components, MiniMax 2.5 was used in OpenCode.', link: 'https://github.com/ThiagoJezini/Web_Design_Atomic', problem: 'The development team used a no-code model and needed an easy and practical way to maintain visual standards and efficiency in the transition to traditional programming.', role: 'Design team leader', result: 'The library was widely used and updated with additional components to better cover the projects that emerged, accelerating development and reducing costs with requests', gallery: ['/projects/atomic-design-system/slide-1.png', '/projects/atomic-design-system/slide-2.png', '/projects/atomic-design-system/slide-3.png', '/projects/atomic-design-system/slide-4.png', '/projects/atomic-design-system/slide-5.png'] },
-    { id: 2, name: 'Portfolio Windows 7', category: null, isFavorite: true, image: null, context: 'A modern portfolio website', problem: 'Needed a unique way to showcase projects', role: 'Full Stack Developer', result: 'Increased user engagement by 40%', gallery: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'] },
-    { id: 3, name: 'E-commerce Platform', category: null, isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 4, name: 'Mobile App', category: 'uiux', isFavorite: true, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 5, name: 'Dashboard AI', category: 'uiux', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 6, name: 'Figma Design System', category: 'design-systems', isFavorite: true, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 7, name: 'React Component Library', category: 'design-systems', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 8, name: 'Brand Identity', category: 'branding', isFavorite: true, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 9, name: 'Logo Collection', category: 'branding', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 10, name: 'Task Manager App', category: 'uiux', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 11, name: 'Style Guide', category: 'design-systems', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 12, name: 'Brand Guidelines', category: 'branding', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
+    { id: 2, name: 'BPMS', category: 'uiux', isFavorite: false, image: '/projects/bpms/thumbnail.png', context: 'The BPMS project is aimed at digitizing the process in which it is named (Business Process Management Suite). Initially made to order, it was thought of in its development to become an end product that could be used by companies in business management and internal production.', problem: 'The contracting company needed a way to generate KPIs to analyze its effectiveness.', role: 'Product Designer and UI & UX Designer, working directly on controlling activities and deliveries of the development team.', result: 'The system was completed and met the demand to generate KPIs on production, meeting the client demand and generating an internal product ready to be commercialized.', gallery: ['/projects/bpms/slide-1.png', '/projects/bpms/slide-2.png', '/projects/bpms/slide-3.png', '/projects/bpms/slide-4.png', '/projects/bpms/slide-5.png', '/projects/bpms/slide-6.png', '/projects/bpms/slide-7.png'] },
   ],
   pt: [
     { id: 1, name: 'Atomic Design System', category: 'design-systems', isFavorite: true, image: '/projects/atomic-design-system/thumbnail.png', context: 'Desenvolvimento de um Design System baseado em Atomic Design, com criação de tokens, componentes reutilizáveis e estruturação de uma biblioteca em React. O projeto teve como objetivo acelerar o trabalho do time de front-end, reduzir inconsistências entre produtos e fortalecer a colaboração entre design e engenharia. Para desenvolver os componentes, foi utilizado MiniMax 2.5 no OpenCode.', link: 'https://github.com/ThiagoJezini/Web_Design_Atomic', problem: 'O time de desenvolvimento utilizava modelo no-code e precisava de uma maneira fácil e prática de manter o padrão visual e eficiência na transição para programação tradicional.', role: 'Líder da equipe de design', result: 'A biblioteca foi amplamente utilizada e atualizada com componentes adicionais para melhor abranger os projetos que surgiram, acelerando o desenvolvimento e diminuindo custos com requisições', gallery: ['/projects/atomic-design-system/slide-1.png', '/projects/atomic-design-system/slide-2.png', '/projects/atomic-design-system/slide-3.png', '/projects/atomic-design-system/slide-4.png', '/projects/atomic-design-system/slide-5.png'] },
-    { id: 2, name: 'Portfolio Windows 7', category: null, isFavorite: true, image: null, context: 'Um website de portfólio moderno', problem: 'Precisa de uma maneira única de exibir projetos', role: 'Desenvolvedor Full Stack', result: 'Aumento do engajamento do usuário em 40%', gallery: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'] },
-    { id: 3, name: 'E-commerce Platform', category: null, isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 4, name: 'Mobile App', category: 'uiux', isFavorite: true, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 5, name: 'Dashboard AI', category: 'uiux', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 6, name: 'Figma Design System', category: 'design-systems', isFavorite: true, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 7, name: 'React Component Library', category: 'design-systems', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 8, name: 'Brand Identity', category: 'branding', isFavorite: true, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 9, name: 'Logo Collection', category: 'branding', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 10, name: 'Task Manager App', category: 'uiux', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 11, name: 'Style Guide', category: 'design-systems', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
-    { id: 12, name: 'Brand Guidelines', category: 'branding', isFavorite: false, image: null, context: '', problem: '', role: '', result: '', gallery: [] },
+    { id: 2, name: 'BPMS', category: 'uiux', isFavorite: false, image: '/projects/bpms/thumbnail.png', context: 'O projeto BPMS é voltado para digitalizar o processo na qual é nomeado (Business Process Management Suite). Inicialmente feito sob encomenda, foi pensado em seu desenvolvimento a tornar-se um produto final que pudesse ser utilizado por empresas no gerenciamento de negócios e produção interna.', problem: 'A empresa contratante precisava de uma maneira de gerar KPIs para analisar sua efetividade.', role: 'Product Designer e UI & UX Designer, trabalhando diretamente no controle de atividades e entregas do time de desenvolvimento.', result: 'O sistema chegou a ser finalizado e supriu a demanda de gerar KPIs em cima da produção, suprindo a demanda do cliente e gerando um produto interno pronto a ser comercializado.', gallery: ['/projects/bpms/slide-1.png', '/projects/bpms/slide-2.png', '/projects/bpms/slide-3.png', '/projects/bpms/slide-4.png', '/projects/bpms/slide-5.png', '/projects/bpms/slide-6.png', '/projects/bpms/slide-7.png'] },
   ],
 };
 
@@ -131,7 +111,7 @@ function ProjectsWindow() {
     return sectionLabels[key]?.[language] || key;
   };
 
-  const getFilteredProjects = () => {
+  const displayedProjects = useMemo(() => {
     if (expandedSection) {
       return currentProjects.filter(p => p.category === expandedSection);
     }
@@ -142,7 +122,12 @@ function ProjectsWindow() {
       return currentProjects.filter(p => p.isFavorite);
     }
     return currentProjects;
-  };
+  }, [currentProjects, expandedSection, selectedSection]);
+
+  const currentSlideImage = useMemo(() => {
+    if (!galleryImages.length) return null;
+    return galleryImages[currentSlide];
+  }, [galleryImages, currentSlide]);
 
   const handleSectionClick = (sectionKey, hasChevron = false) => {
     if (!hasChevron && sectionKey === selectedSection && !currentProjectId) return;
@@ -173,8 +158,6 @@ function ProjectsWindow() {
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
   };
-
-  const displayedProjects = getFilteredProjects();
 
   return (
     <div className="projects-window">
