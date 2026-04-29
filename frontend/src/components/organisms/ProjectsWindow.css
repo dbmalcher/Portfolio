@@ -314,6 +314,22 @@
   line-height: 1.5;
 }
 
+.project-detail-role {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5a5a5a;
+  margin: 8px 0 0 0;
+  line-height: 1.4;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.project-detail-role strong {
+  font-weight: 600;
+  color: #3a3a3a;
+}
+
 .project-link {
   display: inline-flex;
   align-items: center;

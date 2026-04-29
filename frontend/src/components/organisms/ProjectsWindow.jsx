@@ -5,12 +5,12 @@ import './ProjectsWindow.css';
 
 const projectData = {
   en: [
-    { id: 1, name: 'Atomic Design System', category: 'design-systems', isFavorite: true, image: '/projects/atomic-design-system/thumbnail.png', context: 'Development of an Atomic Design-based Design System, with creation of tokens, reusable components and structuring of a React library. The project aimed to accelerate the front-end team\'s work, reduce inconsistencies between products and strengthen collaboration between design and engineering. To develop the components, MiniMax 2.5 was used in OpenCode.', link: 'https://github.com/ThiagoJezini/Web_Design_Atomic', problem: 'The development team used a no-code model and needed an easy and practical way to maintain visual standards and efficiency in the transition to traditional programming.', role: 'Design team leader', result: 'The library was widely used and updated with additional components to better cover the projects that emerged, accelerating development and reducing costs with requests', gallery: ['/projects/atomic-design-system/slide-1.png', '/projects/atomic-design-system/slide-2.png', '/projects/atomic-design-system/slide-3.png', '/projects/atomic-design-system/slide-4.png', '/projects/atomic-design-system/slide-5.png'] },
-    { id: 2, name: 'BPMS', category: 'uiux', isFavorite: false, image: '/projects/bpms/thumbnail.png', context: 'The BPMS project is aimed at digitizing the process in which it is named (Business Process Management Suite). Initially made to order, it was thought of in its development to become an end product that could be used by companies in business management and internal production.', problem: 'The contracting company needed a way to generate KPIs to analyze its effectiveness.', role: 'Product Designer and UI & UX Designer, working directly on controlling activities and deliveries of the development team.', result: 'The system was completed and met the demand to generate KPIs on production, meeting the client demand and generating an internal product ready to be commercialized.', gallery: ['/projects/bpms/slide-1.png', '/projects/bpms/slide-2.png', '/projects/bpms/slide-3.png', '/projects/bpms/slide-4.png', '/projects/bpms/slide-5.png', '/projects/bpms/slide-6.png', '/projects/bpms/slide-7.png'] },
+    { id: 1, name: 'Atomic Design System', category: 'design-systems', isFavorite: true, image: '/projects/atomic-design-system/thumbnail.png', context: 'Development of an Atomic Design-based Design System, with creation of tokens, reusable components and structuring of a React library. The project aimed to accelerate the front-end team\'s work, reduce inconsistencies between products and strengthen collaboration between design and engineering. To develop the components, MiniMax 2.5 was used in OpenCode.', link: 'https://github.com/ThiagoJezini/Web_Design_Atomic', problem: 'The design challenge was developing a scalable design system that could unify visual standards across multiple products while still being flexible enough to accommodate future needs. The goal was to reduce development time, eliminate inconsistencies, and improve collaboration between design and engineering teams through a shared component library.', role: 'Design team leader', result: 'The library was widely adopted and expanded with additional components to cover emerging project needs. Development time was significantly reduced, and visual consistency improved across all products. The system became the single source of truth for design and enabled faster iteration cycles.', lessons: 'In this project, the main learning was more technical, especially about how AI can be implemented to enhance and optimize human productivity without replacing peoples role in the process. It was an important experience to understand AI as a support tool: capable of automating steps, accelerating analyses, and facilitating decisions, but always keeping the user as a central part of the workflow.', gallery: ['/projects/atomic-design-system/slide-1.png', '/projects/atomic-design-system/slide-2.png', '/projects/atomic-design-system/slide-3.png', '/projects/atomic-design-system/slide-4.png', '/projects/atomic-design-system/slide-5.png'] },
+    { id: 2, name: 'BPMS', category: 'uiux', isFavorite: false, image: '/projects/bpms/thumbnail.png', context: 'The BPMS project is aimed at digitizing the process in which it is named (Business Process Management Suite). Initially made to order, it was thought in its development to become an end product that could be used by companies in business management and internal production.', link: '', problem: 'The design challenge was creating a system capable of transforming BPMS-based production flows into clear KPIs and actionable metrics. The goal was to help the company track performance, identify bottlenecks, and understand production efficiency without overwhelming users with complex operational data. The main focus was organizing information in a way that respected the actual structure of the company processes, but that still made dashboards, indicators, and analysis tools simple enough to support quick decisions.', role: 'Product Designer and UI & UX Designer, working directly on controlling and deliveries of the development team.', result: 'The product was delivered successfully, allowing the contractor to track their KPIs more clearly and identify production bottlenecks based on data generated by the BPMS flow itself. With this, the company gained a more strategic view of the operation, facilitating performance analysis and decision-making. In addition to meeting the internal project needs, the final system was consolidated as a scalable solution and began to be offered as a product to other company clients.', lessons: 'This was the project where I had the most creative and organizational freedom, which allowed me to participate more strategically in product and process decisions. In addition to technical learning, it was an important experience to better understand how to organize demands, align expectations, and conduct work more autonomously. I also learned a lot about people management, especially about how to deal with different professional profiles. I understood that each person has their own way of working, communicating, and solving problems, and that recognizing these differences is essential to creating a healthier, more collaborative, and efficient workflow.', gallery: ['/projects/bpms/slide-1.png', '/projects/bpms/slide-2.png', '/projects/bpms/slide-3.png', '/projects/bpms/slide-4.png', '/projects/bpms/slide-5.png', '/projects/bpms/slide-6.png', '/projects/bpms/slide-7.png'] },
   ],
   pt: [
-    { id: 1, name: 'Atomic Design System', category: 'design-systems', isFavorite: true, image: '/projects/atomic-design-system/thumbnail.png', context: 'Desenvolvimento de um Design System baseado em Atomic Design, com criação de tokens, componentes reutilizáveis e estruturação de uma biblioteca em React. O projeto teve como objetivo acelerar o trabalho do time de front-end, reduzir inconsistências entre produtos e fortalecer a colaboração entre design e engenharia. Para desenvolver os componentes, foi utilizado MiniMax 2.5 no OpenCode.', link: 'https://github.com/ThiagoJezini/Web_Design_Atomic', problem: 'O time de desenvolvimento utilizava modelo no-code e precisava de uma maneira fácil e prática de manter o padrão visual e eficiência na transição para programação tradicional.', role: 'Líder da equipe de design', result: 'A biblioteca foi amplamente utilizada e atualizada com componentes adicionais para melhor abranger os projetos que surgiram, acelerando o desenvolvimento e diminuindo custos com requisições', gallery: ['/projects/atomic-design-system/slide-1.png', '/projects/atomic-design-system/slide-2.png', '/projects/atomic-design-system/slide-3.png', '/projects/atomic-design-system/slide-4.png', '/projects/atomic-design-system/slide-5.png'] },
-    { id: 2, name: 'BPMS', category: 'uiux', isFavorite: false, image: '/projects/bpms/thumbnail.png', context: 'O projeto BPMS é voltado para digitalizar o processo na qual é nomeado (Business Process Management Suite). Inicialmente feito sob encomenda, foi pensado em seu desenvolvimento a tornar-se um produto final que pudesse ser utilizado por empresas no gerenciamento de negócios e produção interna.', problem: 'A empresa contratante precisava de uma maneira de gerar KPIs para analisar sua efetividade.', role: 'Product Designer e UI & UX Designer, trabalhando diretamente no controle de atividades e entregas do time de desenvolvimento.', result: 'O sistema chegou a ser finalizado e supriu a demanda de gerar KPIs em cima da produção, suprindo a demanda do cliente e gerando um produto interno pronto a ser comercializado.', gallery: ['/projects/bpms/slide-1.png', '/projects/bpms/slide-2.png', '/projects/bpms/slide-3.png', '/projects/bpms/slide-4.png', '/projects/bpms/slide-5.png', '/projects/bpms/slide-6.png', '/projects/bpms/slide-7.png'] },
+    { id: 1, name: 'Atomic Design System', category: 'design-systems', isFavorite: true, image: '/projects/atomic-design-system/thumbnail.png', context: 'Development of an Atomic Design-based Design System, with creation of tokens, reusable components and structuring of a React library. The project aimed to accelerate the front-end team\'s work, reduce inconsistencies between products and strengthen collaboration between design and engineering. To develop the components, MiniMax 2.5 was used in OpenCode.', link: 'https://github.com/ThiagoJezini/Web_Design_Atomic', problem: 'O desafio de design foi desenvolver um design system escalável que pudesse unificar os padrões visuais entre múltiplos produtos, mas que ainda fosse flexível o bastante para acomodar necessidades futuras. O objetivo era reduzir o tempo de desenvolvimento, eliminar inconsistências e melhorar a colaboração entre as equipes de design e engenharia através de uma biblioteca de componentes compartilhada.', role: 'Líder da equipe de design', result: 'A biblioteca foi amplamente adotada e expandida com componentes adicionais para cobrir as necessidades dos projetos que surgiram. O tempo de desenvolvimento foi significativamente reduzido e a consistência visual melhorou em todos os produtos. O sistema se tornou a única fonte de verdade para design e permitiu ciclos de iteração mais rápidos.', lessons: 'In this project, the main learning was more technical, especially about how AI can be implemented to enhance and optimize human productivity without replacing peoples role in the process. It was an important experience to understand AI as a support tool: capable of automating steps, accelerating analyses, and facilitating decisions, but always keeping the user as a central part of the workflow.', gallery: ['/projects/atomic-design-system/slide-1.png', '/projects/atomic-design-system/slide-2.png', '/projects/atomic-design-system/slide-3.png', '/projects/atomic-design-system/slide-4.png', '/projects/atomic-design-system/slide-5.png'] },
+    { id: 2, name: 'BPMS', category: 'uiux', isFavorite: false, image: '/projects/bpms/thumbnail.png', context: 'O projeto BPMS é voltado para digitalizar o processo na qual é nomeado (Business Process Management Suite). Inicialmente feito sob encomenda, foi pensado em seu desenvolvimento a tornar-se um produto final que pudesse ser utilizado por empresas no gerenciamento de negócios e produção interna.', link: '', problem: 'O desafio de design foi criar um sistema capaz de transformar os fluxos de produção baseados em BPMS em KPIs claros e métricas acionáveis. O objetivo era ajudar a empresa a acompanhar performance, identificar gargalos e entender a eficiência da produção sem sobrecarregar os usuários com dados operacionais complexos. O foco principal foi organizar as informações de uma forma que respeitasse a estrutura real dos processos da empresa, mas que ainda tornasse dashboards, indicadores e ferramentas de análise simples o suficiente para apoiar decisões rápidas.', role: 'Product Designer e UI & UX Designer, trabalhando diretamente no controle de atividades e entregas do time de desenvolvimento.', result: 'O produto foi entregue com sucesso, permitindo que o contratante acompanhasse seus KPIs com mais clareza e identificasse gargalos de produção com base nos dados gerados pelo próprio fluxo BPMS. Com isso, a empresa passou a ter uma visão mais estratégica da operação, facilitando a análise de desempenho e a tomada de decisão. Além de atender às necessidades internas do projeto, o sistema final se consolidou como uma solução escalável e passou a ser oferecido como produto para outros clientes da empresa.', lessons: 'Esse foi o projeto em que tiver mais liberdade criativa e organizacional, o que me permitiu participar de forma mais estratégica das decisões de produto e processo. Além do aprendizado técnico, foi uma experiência importante para entender melhor como organizar demandas, alinhar expectativas e conduzir o trabalho de forma mais autônoma. Também aprendi muito sobre gestão de pessoas, principalmente sobre como lidar com diferentes perfis profissionais. Entendi que cada pessoa tem sua própria forma de trabalhar, se comunicar e resolver problemas, e que reconhecer essas diferenças é essencial para criar um fluxo de trabalho mais saudável, colaborativo e eficiente.', gallery: ['/projects/bpms/slide-1.png', '/projects/bpms/slide-2.png', '/projects/bpms/slide-3.png', '/projects/bpms/slide-4.png', '/projects/bpms/slide-5.png', '/projects/bpms/slide-6.png', '/projects/bpms/slide-7.png'] },
   ],
 };
 
@@ -293,6 +293,9 @@ function ProjectsWindow() {
                 <div className="project-detail-info">
                   <h2 className="project-detail-name">{currentProject.name}</h2>
                   <p className="project-detail-context">{currentProject.context || 'No description available.'}</p>
+                  <p className="project-detail-role">
+                    <strong>{t('myRole') || 'My Role'}:</strong> {currentProject.role || 'No role description available.'}
+                  </p>
                   {currentProject.link && (
                     <a href={currentProject.link} target="_blank" rel="noopener noreferrer" className="project-link">
                       {t('projectLink') || 'View Project'} →
@@ -302,64 +305,64 @@ function ProjectsWindow() {
               </div>
               
               <div className="project-detail-sections">
-                <div className="project-section">
-                  <h3 className="project-section-title">{t('problem') || 'Problem'}</h3>
-                  <p className="project-section-text">{currentProject.problem || 'No problem description available.'}</p>
-                </div>
-                <div className="project-section">
-                  <h3 className="project-section-title">{t('myRole') || 'My Role'}</h3>
-                  <p className="project-section-text">{currentProject.role || 'No role description available.'}</p>
-                </div>
-                <div className="project-section">
-                  <h3 className="project-section-title">{t('result') || 'Result'}</h3>
-                  <p className="project-section-text">{currentProject.result || 'No result description available.'}</p>
-                </div>
-              </div>
-              
-              <div className="project-detail-gallery">
-                <h3 className="gallery-title">{t('projectPresentation') || 'Project Presentation'}</h3>
-                {galleryImages.length > 0 ? (
-                  <div className="gallery-carousel">
-                    <button className="gallery-nav gallery-prev" onClick={prevSlide} disabled={galleryImages.length <= 1}>
-                      <PrevIcon size={24} weight="bold" />
-                    </button>
-                    <div className="gallery-slide">
-                      {galleryImages[currentSlide].startsWith('#') ? (
-                        <div className="gallery-color-slide" style={{ backgroundColor: galleryImages[currentSlide] }}></div>
-                      ) : (
-                        <img src={galleryImages[currentSlide]} alt={`Slide ${currentSlide + 1}`} loading="lazy" />
-                      )}
-                    </div>
-                    <button className="gallery-nav gallery-next" onClick={nextSlide} disabled={galleryImages.length <= 1}>
-                      <NextIcon size={24} weight="bold" />
-                    </button>
+                  <div className="project-section">
+                    <h3 className="project-section-title">{t('designChallenge') || 'Design Challenge'}</h3>
+                    <p className="project-section-text">
+                      <strong>Challenge:</strong> {currentProject.problem || 'No challenge description available.'}<br /><br />
+                      <strong>Outcome:</strong> {currentProject.result || 'No outcome description available.'}
+                    </p>
                   </div>
-                ) : (
-                  <div className="gallery-placeholder"></div>
-                )}
-                {galleryImages.length > 0 && (
-                  <>
-                    <div className="gallery-counter">
-                      {currentSlide + 1} / {galleryImages.length}
+                </div>
+                
+                <div className="project-detail-gallery">
+                  <h3 className="gallery-title">{t('projectPresentation') || 'Project Presentation'}</h3>
+                  {galleryImages.length > 0 ? (
+                    <div className="gallery-carousel">
+                      <button className="gallery-nav gallery-prev" onClick={prevSlide} disabled={galleryImages.length <= 1}>
+                        <PrevIcon size={24} weight="bold" />
+                      </button>
+                      <div className="gallery-slide">
+                        {galleryImages[currentSlide].startsWith('#') ? (
+                          <div className="gallery-color-slide" style={{ backgroundColor: galleryImages[currentSlide] }}></div>
+                        ) : (
+                          <img src={galleryImages[currentSlide]} alt={`Slide ${currentSlide + 1}`} loading="lazy" />
+                        )}
+                      </div>
+                      <button className="gallery-nav gallery-next" onClick={nextSlide} disabled={galleryImages.length <= 1}>
+                        <NextIcon size={24} weight="bold" />
+                      </button>
                     </div>
-                    <div className="gallery-thumbnails">
-                      {galleryImages.map((img, idx) => (
-                        <button 
-                          key={idx} 
-                          className={`gallery-thumb ${idx === currentSlide ? 'active' : ''}`}
-                          onClick={() => setCurrentSlide(idx)}
-                        >
-                          {img.startsWith('#') ? (
-                            <div className="gallery-thumb-color" style={{ backgroundColor: img }}></div>
-                          ) : (
-                            <img src={img} alt={`Thumb ${idx + 1}`} loading="lazy" />
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
+                  ) : (
+                    <div className="gallery-placeholder"></div>
+                  )}
+                  {galleryImages.length > 0 && (
+                    <>
+                      <div className="gallery-counter">
+                        {currentSlide + 1} / {galleryImages.length}
+                      </div>
+                      <div className="gallery-thumbnails">
+                        {galleryImages.map((img, idx) => (
+                          <button 
+                            key={idx} 
+                            className={`gallery-thumb ${idx === currentSlide ? 'active' : ''}`}
+                            onClick={() => setCurrentSlide(idx)}
+                          >
+                            {img.startsWith('#') ? (
+                              <div className="gallery-thumb-color" style={{ backgroundColor: img }}></div>
+                            ) : (
+                              <img src={img} alt={`Thumb ${idx + 1}`} loading="lazy" />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div className="project-section">
+                  <h3 className="project-section-title">{t('lessonsLearned') || 'Lessons Learned'}</h3>
+                  <p className="project-section-text">{currentProject.lessons || 'No lessons learned available.'}</p>
+                </div>
             </div>
           ) : (
             <div className="thumbnails-grid">
