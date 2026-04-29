@@ -1,0 +1,47 @@
+@import '../atoms/tokens.css';
+
+.window-btn {
+  width: 21px;
+  height: 20px;
+  border: 1px solid rgba(106, 91, 243, 0.4);
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.window-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 100%);
+  border-color: rgba(106, 91, 243, 0.6);
+}
+
+.window-btn.minimize,
+.window-btn.maximize {
+  
+}
+
+.window-btn.close {
+  background: linear-gradient(135deg, rgba(134, 31, 36, 0.7) 0%, rgba(134, 31, 36, 0.5) 100%);
+  border-color: rgba(134, 31, 36, 0.5);
+}
+
+.window-btn.close:hover {
+  background: linear-gradient(135deg, rgba(134, 31, 36, 0.9) 0%, rgba(134, 31, 36, 0.7) 100%);
+  border-color: rgba(134, 31, 36, 0.8);
+}
+
+@media (max-width: 768px) {
+  .window-btn {
+    width: var(--button-width-xs);
+    height: var(--button-height-xs);
+    font-size: var(--font-size-xs);
+  }
+}
